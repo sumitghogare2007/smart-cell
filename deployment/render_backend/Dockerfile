@@ -28,7 +28,7 @@ WORKDIR /app
 # Install Python dependencies optimized for Render CPU
 COPY deployment/render_backend/requirements-render.txt ./requirements-render.txt
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements-render.txt
+    pip install --no-cache-dir --extra-index-url https://download.pytorch.org/whl/cpu -r requirements-render.txt
 
 # Copy application source code and scripts
 COPY scripts/ /app/scripts/
@@ -53,7 +53,7 @@ EXPOSE 8501
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=45s --retries=3 \
-  CMD curl -f http://localhost:8501/api/health || exit 1
+  CMD curl -f http://localhost:${PORT:-8501}/api/health || exit 1
 
 # Launch SmartCell Render backend server
-CMD ["python", "deployment/render_backend/render_app.py", "--host", "0.0.0.0", "--port", "8501"]
+CMD ["sh", "-c", "python deployment/render_backend/render_app.py --host 0.0.0.0 --port ${PORT:-8501}"]

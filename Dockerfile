@@ -30,7 +30,7 @@ WORKDIR /app
 # Install Python production dependencies
 COPY requirements-cloud.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements-cloud.txt
+    pip install --no-cache-dir --extra-index-url https://download.pytorch.org/whl/cpu -r requirements-cloud.txt
 
 # Copy application source code
 COPY scripts/ /app/scripts/
@@ -55,7 +55,7 @@ EXPOSE 8501
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-  CMD curl -f http://localhost:8501/api/health || exit 1
+  CMD curl -f http://localhost:${PORT:-8501}/api/health || exit 1
 
 # Launch SmartCell web application
-CMD ["python", "scripts/smartcell_demo_app.py", "--host", "0.0.0.0", "--port", "8501"]
+CMD ["sh", "-c", "python scripts/smartcell_demo_app.py --host 0.0.0.0 --port ${PORT:-8501}"]
