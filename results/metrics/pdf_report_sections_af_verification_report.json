@@ -1,0 +1,86 @@
+{
+  "timestamp": "2026-10-12T21:33:06",
+  "server_url": "http://127.0.0.1:8519",
+  "all_checks_passed": true,
+  "checks": {
+    "1_sections_af_present_and_g_onwards_absent": {
+      "passed": true,
+      "sections_present": [
+        "A. Report Header",
+        "B. Executive Summary",
+        "C. Model and Configuration Details",
+        "D. Confidence and Processing Information",
+        "E. Annotated Image",
+        "F. Cell-Level Results"
+      ],
+      "forbidden_sections_found": [],
+      "run_id": "run_20261012_213306_IMG_20150819_133447_finetuned_raw_raw_962703",
+      "pdf_filename": "SmartCell_Report_IMG_20150819_133447.pdf",
+      "pdf_byte_size": 387570,
+      "page_count": 4
+    },
+    "2_case_a_parasitized_final_result_and_counts": {
+      "passed": true,
+      "verified_valid_rbcs": 195,
+      "verified_parasitized_rbcs": 74,
+      "verified_uninfected_rbcs": 121,
+      "verified_parasitemia_str": "37.95%",
+      "final_sentence": "The AI detected cells that may contain malaria parasites. Malaria status is not confirmed.",
+      "appears_after_last_cell_row": true,
+      "disclaimer_present": true
+    },
+    "3_section_e_annotated_image_embedded": {
+      "passed": true,
+      "embedded_image_dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "caption_present": true
+    },
+    "4_compact_multipage_cell_table": {
+      "passed": true,
+      "total_pages": 4,
+      "within_2_to_4_pages_target": true,
+      "first_cell_present": true,
+      "last_cell_present": true,
+      "class_legend_present": true
+    },
+    "5_case_b_zero_parasitized_final_result": {
+      "passed": true,
+      "final_sentence": "The AI did not flag any cells as potentially parasitized. This does not rule out malaria.",
+      "verified_counts": "0 of 40 valid RBCs (0.00%)"
+    },
+    "6_case_c_zero_valid_cells_final_result": {
+      "passed": true,
+      "run_id": "run_20261012_213359_IMG_20150819_133447_finetuned_raw_raw_e706ea",
+      "page_count": 1,
+      "final_sentence": "No reliable result is available for this image."
+    },
+    "7_missing_metadata_and_error_handling": {
+      "passed": true,
+      "special_chars_escaped_safely": true,
+      "corrupted_upload_http_status": 400,
+      "empty_summary_raises_value_error": true
+    },
+    "8_ui_pdf_json_csv_consistency": {
+      "passed": true,
+      "valid_rbcs": 195,
+      "parasitized_rbcs": 74,
+      "uninfected_rbcs": 121
+    },
+    "9_selected_model_and_crop_mode_in_pdf": {
+      "passed": true,
+      "run_id": "run_20261012_213436_IMG_20150819_133447_original_masked_e5bc51",
+      "page_count": 4,
+      "verified_counts": "81 of 195 valid RBCs (41.54%)"
+    },
+    "10_live_server_sections_af_pdf_download": {
+      "passed": true,
+      "verified_server_url": "http://127.0.0.1:8501",
+      "run_id": "run_20261012_213544_IMG_20150819_133447_finetuned_raw_raw_9a3d87",
+      "page_count": 4,
+      "pdf_bytes": 387571,
+      "sections_af_only_verified": true
+    }
+  }
+}

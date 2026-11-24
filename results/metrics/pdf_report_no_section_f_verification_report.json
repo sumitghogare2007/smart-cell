@@ -1,0 +1,85 @@
+{
+  "timestamp": "2026-10-12T21:53:40",
+  "server_url": "http://127.0.0.1:8519",
+  "all_checks_passed": true,
+  "checks": {
+    "1_sections_a_to_e_present_with_annotated_image": {
+      "passed": true,
+      "verified_headings": [
+        "A. Report & Specimen Identification",
+        "B. Executive Summary",
+        "C. Model & Configuration Details",
+        "D. Confidence Statistics & Processing Telemetry",
+        "E. Annotated Blood-Smear Field Overview"
+      ],
+      "embedded_image_dimensions": {
+        "width": 1920,
+        "height": 1080
+      }
+    },
+    "2_section_f_and_cell_table_completely_absent": {
+      "passed": true,
+      "forbidden_tokens_checked": [
+        "F. Cell-Level",
+        "Cell-Level Detection",
+        "Cell-Level Results",
+        "IMG_20150819_133447_cell_0001",
+        "IMG_20150819_133447_cell_0050",
+        "IMG_20150819_133447_cell_0195",
+        "Class Legend:"
+      ],
+      "forbidden_tokens_found": []
+    },
+    "3_sections_g_and_h_conditional_inclusion": {
+      "passed": true,
+      "section_g_and_h_present_when_gt_exists": true,
+      "section_h_omitted_gracefully_when_no_gt": true
+    },
+    "4_final_ai_screening_result_all_3_cases": {
+      "passed": true,
+      "positive_case_statement": "The AI flagged 74 potentially parasitized red blood cells. Estimated parasitemia: 37.95%.",
+      "zero_flagged_case_statement": "The AI did not flag any potentially parasitized red blood cells in this image.",
+      "zero_valid_detections_statement": "No reliable result is available for this image.",
+      "mandatory_disclaimer": "This AI screening result does not confirm or rule out malaria in a patient. Clinical assessment and appropriate diagnostic testing are required."
+    },
+    "5_counts_and_parasitemia_match_current_analysis": {
+      "passed": true,
+      "finetuned_raw_counts": {
+        "valid": 195,
+        "parasitized": 74,
+        "uninfected": 121,
+        "parasitemia": "37.95%"
+      },
+      "original_masked_counts": {
+        "valid": 195,
+        "parasitized": 81,
+        "uninfected": 114,
+        "parasitemia": "41.54%"
+      }
+    },
+    "6_pdf_substantially_shorter_page_count": {
+      "passed": true,
+      "normal_analysis_page_count": 2,
+      "switched_model_page_count": 2,
+      "zero_detection_page_count": 2,
+      "original_report_page_count_before_removing_f": 10
+    },
+    "8_existing_technical_exports_working": {
+      "passed": true,
+      "csv_bytes": 47787,
+      "summary_json_bytes": 4978,
+      "rejected_json_bytes": 165,
+      "txt_report_bytes": 4216,
+      "annotated_jpg_bytes": 287184
+    },
+    "7_pdf_download_button_and_http_download": {
+      "passed": true,
+      "verified_server_url": "http://127.0.0.1:8501",
+      "run_id": "run_20261012_215608_IMG_20150819_133447_finetuned_raw_raw_51353c",
+      "page_count": 2,
+      "pdf_bytes": 367750,
+      "content_type": "application/pdf",
+      "content_disposition": "attachment; filename=\"SmartCell_Report_IMG_20150819_133447.pdf\""
+    }
+  }
+}

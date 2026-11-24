@@ -1,0 +1,37 @@
+{
+  "training_timestamp": "2026-11-21T22:50:00+05:30",
+  "random_seed": 42,
+  "input_resolution": [
+    224,
+    224
+  ],
+  "batch_size": 32,
+  "class_names": [
+    "0_normal",
+    "1_blast"
+  ],
+  "class_weights": {
+    "0": 1.0055555555555555,
+    "1": 0.9945054945054945
+  },
+  "models": {
+    "custom_cnn": {
+      "saved_path": "D:\\smartcell\\models\\all_idb_custom_cnn_best.keras",
+      "train_time_sec": 398.20334029197693,
+      "best_val_loss": 0.6869257688522339,
+      "best_val_acc": 0.6410256624221802
+    },
+    "mobilenetv2": {
+      "saved_path": "D:\\smartcell\\models\\all_idb_mobilenetv2_best.keras",
+      "train_time_sec": 132.2254331111908,
+      "best_val_loss": 0.16919563710689545,
+      "best_val_acc": 0.9743589758872986
+    },
+    "efficientnetb0": {
+      "saved_path": "D:\\smartcell\\models\\all_idb_efficientnetb0_best.keras",
+      "train_time_sec": 195.1053981781006,
+      "best_val_loss": 0.12598273158073425,
+      "best_val_acc": 0.9743589758872986
+    }
+  }
+}

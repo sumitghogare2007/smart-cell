@@ -1,0 +1,1848 @@
+{
+  "dataset_name": "ALL_IDB2_Leukemia",
+  "random_seed": 42,
+  "deduplication": [
+    {
+      "duplicate_file": "Im257_0.tif",
+      "original_file": "Im223_0.tif",
+      "sha256": "fbe38fc851c0a5a26b41b3768ea9dee573f3670c4e649494a41b0d51e91d26bf"
+    }
+  ],
+  "total_unique_samples": 259,
+  "splits": {
+    "train": {
+      "total_count": 181,
+      "class_0_count": 90,
+      "class_1_count": 91,
+      "files": [
+        {
+          "source_file": "Im147_0.tif",
+          "prepared_file": "Im147_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "6cdcf83d0147c8e34bafaa6042467a9817b9a62bafa27447a5beeb78df226968"
+        },
+        {
+          "source_file": "Im174_0.tif",
+          "prepared_file": "Im174_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "2fcdfd21f9f77f719854380facb8aca2c77f13c07c6956db0479742de5ea88ed"
+        },
+        {
+          "source_file": "Im188_0.tif",
+          "prepared_file": "Im188_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "7f28d24ba9e73a90200ac04bc39a3c235aa8640874f82692f6bc00777b90ff64"
+        },
+        {
+          "source_file": "Im224_0.tif",
+          "prepared_file": "Im224_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "9f65c19f24aed6a3f5c52e1535d26dc0adc94b483a8aeeeb918caac5f64bf1f6"
+        },
+        {
+          "source_file": "Im199_0.tif",
+          "prepared_file": "Im199_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "81f2dfd630b9788bd205855017ecae911508215127d4cdafef1d10178bcbcf2f"
+        },
+        {
+          "source_file": "Im232_0.tif",
+          "prepared_file": "Im232_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "e454bdbbf5d2e5790438dbd7b93f1e098aa07c7e029276e7b716fa694f6cc7c4"
+        },
+        {
+          "source_file": "Im222_0.tif",
+          "prepared_file": "Im222_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "652061dfaa2ca6fcdb40b7bbc4e241dea11879741d079067e9695af7ae5c5cc9"
+        },
+        {
+          "source_file": "Im068_1.tif",
+          "prepared_file": "Im068_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "1faf62a0cc3c5589eb5d0b4e64b2ad2ef446b2bf3a747c34a1cd40e2b071789a"
+        },
+        {
+          "source_file": "Im089_1.tif",
+          "prepared_file": "Im089_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "e17589aaa913e2c56adbdade5915c321121ad9a48f9ea4a82ff3f8a2cf4d248a"
+        },
+        {
+          "source_file": "Im113_1.tif",
+          "prepared_file": "Im113_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "077ac60a10ad64ab6b82ffb76e2ebe63b3f7d4a25c336c1edbdf0953e3e2f74d"
+        },
+        {
+          "source_file": "Im178_0.tif",
+          "prepared_file": "Im178_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "1db7746ef6d3093a1f4d4b991df97b353043f4ec05d90336ecd0fe51f52d06e1"
+        },
+        {
+          "source_file": "Im105_1.tif",
+          "prepared_file": "Im105_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "2fd72acde14c2199249b8166ca1321e5545ab43aa8e3e83fbf22f42cf16e7748"
+        },
+        {
+          "source_file": "Im153_0.tif",
+          "prepared_file": "Im153_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "7af47f04a733343185867b41738dacbc454ea41333857fdfec683c776ac20bb9"
+        },
+        {
+          "source_file": "Im025_1.tif",
+          "prepared_file": "Im025_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "83006788293c730887fafd4182186a14aaa04d19fd38822babc7c999167327d6"
+        },
+        {
+          "source_file": "Im221_0.tif",
+          "prepared_file": "Im221_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "33c63b94f88f2977d502d36f1f56de633f19cb51184a098e256f2a24e72f813e"
+        },
+        {
+          "source_file": "Im072_1.tif",
+          "prepared_file": "Im072_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "09315012cf0a6fde2a2c884709e7a0f2d9962483072bde2ddc5434e0a56f5c76"
+        },
+        {
+          "source_file": "Im130_1.tif",
+          "prepared_file": "Im130_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "cd3f7ba2510056c612ee492a182471788495c86bf8dbd894afed328f4b82a5b8"
+        },
+        {
+          "source_file": "Im158_0.tif",
+          "prepared_file": "Im158_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "b07d5321f98377620922065f6a124fe89a9e53780a54e63822f70e9f72f38b9a"
+        },
+        {
+          "source_file": "Im209_0.tif",
+          "prepared_file": "Im209_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "f4114813c72c0bb21dff20fe2f8b835b8168668e94a2131754651086bab16255"
+        },
+        {
+          "source_file": "Im173_0.tif",
+          "prepared_file": "Im173_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "b7bdd4f7b25fed9727938d9fbdd5ab702405ded7068294cc801c170df90b735c"
+        },
+        {
+          "source_file": "Im229_0.tif",
+          "prepared_file": "Im229_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "bda003d48affe66daec21ba8246801548163ba3cdbab0a41c0eae35aa301835e"
+        },
+        {
+          "source_file": "Im111_1.tif",
+          "prepared_file": "Im111_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "9ede506d971dd89771e3e1c171e7e82b66a044a473e7643cc8f6af3d4a1347f3"
+        },
+        {
+          "source_file": "Im042_1.tif",
+          "prepared_file": "Im042_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "a85a791412174657785b46d7ac6a9108e67d85a6e8a14020c2e0f396556e1d02"
+        },
+        {
+          "source_file": "Im162_0.tif",
+          "prepared_file": "Im162_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "e3eed415062dd5dde2c9aeac8d157436cd3d9600f206dfcbb58d7ad01d807b82"
+        },
+        {
+          "source_file": "Im102_1.tif",
+          "prepared_file": "Im102_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "62a281e4646f8821f8020f22dca64d4f067e7b1d909cbfb93f31ad064d005c2c"
+        },
+        {
+          "source_file": "Im033_1.tif",
+          "prepared_file": "Im033_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "b25e1fbc88c4445b4d1cf0254ff3c5bb2f431344b502d8c4c57cc9c019f4178e"
+        },
+        {
+          "source_file": "Im171_0.tif",
+          "prepared_file": "Im171_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "e8b71df43c65f5b7a694b9be02d97f7a89958315cfb90d3d2011c936bffe5a37"
+        },
+        {
+          "source_file": "Im161_0.tif",
+          "prepared_file": "Im161_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "81a523dff48dbdaebaa3c61f66eaa6da245580a4b40c35e1415dcb204bf19bfa"
+        },
+        {
+          "source_file": "Im031_1.tif",
+          "prepared_file": "Im031_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "3409318084e522381ea12c604452480a7a72a0cd4bb98dda2f740b12b8467f1e"
+        },
+        {
+          "source_file": "Im194_0.tif",
+          "prepared_file": "Im194_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "8e52c96859d26308a9867908497ce076988ac1dc3033267d0ae777de578d26eb"
+        },
+        {
+          "source_file": "Im094_1.tif",
+          "prepared_file": "Im094_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "6ae1dce01673f7ab13b8621d0978d6685f2487edafd1ca1276f607bb05198035"
+        },
+        {
+          "source_file": "Im240_0.tif",
+          "prepared_file": "Im240_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "e1ff679bf67ebc31dd5b908a56b6ad493e07bd59e8a993c9ae3d0ca0e6572c7a"
+        },
+        {
+          "source_file": "Im051_1.tif",
+          "prepared_file": "Im051_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "e04a26ddd0f695e40e32256d7b8bb2e0aa819d5e25a326a697b004de2340b2d2"
+        },
+        {
+          "source_file": "Im172_0.tif",
+          "prepared_file": "Im172_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "fe1108ff53f174d4d02245e9e92a4f5a6c3282e5e4def4bcd0de544a92cbf255"
+        },
+        {
+          "source_file": "Im087_1.tif",
+          "prepared_file": "Im087_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "e2663997eb6b6360c182b911f53c9a70a96ac672585f44c860e5be74b29f95dd"
+        },
+        {
+          "source_file": "Im170_0.tif",
+          "prepared_file": "Im170_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "3d34b58db39fcc2e7eb1e48070b02b7d1ecf861d1d9eb7cdd3bad79ef938cf63"
+        },
+        {
+          "source_file": "Im118_1.tif",
+          "prepared_file": "Im118_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "c2b694595b4a66cede8baf58f68697cb71b7601b784fac19cbeec42b051bbea6"
+        },
+        {
+          "source_file": "Im180_0.tif",
+          "prepared_file": "Im180_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "847aa5314948741725486664d2ce8ee0066ac77bea147b4b1313681e0e5c8d44"
+        },
+        {
+          "source_file": "Im216_0.tif",
+          "prepared_file": "Im216_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "1f834a4ecd92b91d491d632dfc239076ce3be9c29cdd8deb4b90ead42fed5211"
+        },
+        {
+          "source_file": "Im245_0.tif",
+          "prepared_file": "Im245_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "7fb5e540ba41e256cf3f20a6eeeb6e8b7a52d277fb73124de7d425c3161b82c5"
+        },
+        {
+          "source_file": "Im220_0.tif",
+          "prepared_file": "Im220_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "8b2cae5a44a67afa60b0c94be6aedfa2b23b48aec420b98125e3feab69f0909e"
+        },
+        {
+          "source_file": "Im043_1.tif",
+          "prepared_file": "Im043_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "fa29890e13019b6241f627a7dd4a768c5d19face1f448022fbad64af22e5fc9b"
+        },
+        {
+          "source_file": "Im140_0.tif",
+          "prepared_file": "Im140_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "d6e89c32c5c4d6dd8877ed75edfa9f0297e2913e0b0d05926d74983caba9e1a1"
+        },
+        {
+          "source_file": "Im021_1.tif",
+          "prepared_file": "Im021_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "36af804ec79f2c36b1b30fd5423014bb48f2ebb5b71efe528d595a4656469f2d"
+        },
+        {
+          "source_file": "Im129_1.tif",
+          "prepared_file": "Im129_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "8a75e7efa3cc4dd1ae310e2c8e88354df605114406dab0342f17827860527de6"
+        },
+        {
+          "source_file": "Im077_1.tif",
+          "prepared_file": "Im077_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "296fb7268e2e822ab08fc47f741f75f00a044d265762849e3a94c72e9bd041e5"
+        },
+        {
+          "source_file": "Im249_0.tif",
+          "prepared_file": "Im249_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "b2be294ebdc431b2a3e7e5887cee637ec865d472408e79ce87946fbe2dff0709"
+        },
+        {
+          "source_file": "Im159_0.tif",
+          "prepared_file": "Im159_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "23abe2f49f0810b0e03bfe9bf583db2246f886ff7014771897dac0d0053a2ab4"
+        },
+        {
+          "source_file": "Im019_1.tif",
+          "prepared_file": "Im019_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "1f4c9497b4f81e45c0211ac77791aa503d735196cb6e1419264ca927ddc060e6"
+        },
+        {
+          "source_file": "Im040_1.tif",
+          "prepared_file": "Im040_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "f3446d8d3a2a275e0e7120a84a52fe227d4525836e3d716a0710caba81c63a22"
+        },
+        {
+          "source_file": "Im156_0.tif",
+          "prepared_file": "Im156_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "97d177c7201a00e8e1bf23ea95326f73c86e44f6f84939558258396d921b22a5"
+        },
+        {
+          "source_file": "Im136_0.tif",
+          "prepared_file": "Im136_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "f314ccb332eca3aa54d0100a5afdd327944103d871c28b7373de8a21ca884e17"
+        },
+        {
+          "source_file": "Im149_0.tif",
+          "prepared_file": "Im149_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "230a5fdc5cffb62e3be6371a6abf7d8b43c99d1a058624cd0bbb39b57c2f771f"
+        },
+        {
+          "source_file": "Im008_1.tif",
+          "prepared_file": "Im008_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "3417e5147c59fbd7d7eafb56945ef09ef8db128ef0f82f49458b8901f5185a22"
+        },
+        {
+          "source_file": "Im080_1.tif",
+          "prepared_file": "Im080_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "83d6435b3fba4e01d4a58030ce47c0f72dc2f5554f9cbfb16b02005b5195b854"
+        },
+        {
+          "source_file": "Im036_1.tif",
+          "prepared_file": "Im036_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "814c0422890aeb7c15892660ffca966ad80bf02afa1753425c56bf539aa4d365"
+        },
+        {
+          "source_file": "Im115_1.tif",
+          "prepared_file": "Im115_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "dcb603fc149d761f491629f0aae7098f4c7c53b4163c28ec9357158591438891"
+        },
+        {
+          "source_file": "Im038_1.tif",
+          "prepared_file": "Im038_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "34dc2df3d1c5e166fd2f7a38d969e254ffb754f5f3f83be8287c4e8a168f4b62"
+        },
+        {
+          "source_file": "Im238_0.tif",
+          "prepared_file": "Im238_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "651863e04a881cb95b678eca8b3e013fe436d9d09417cea6a2cc38336f760e00"
+        },
+        {
+          "source_file": "Im259_0.tif",
+          "prepared_file": "Im259_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "61ffc9659efe646944bb828104773687e69000942cded0d360d8b1b1d7b73a95"
+        },
+        {
+          "source_file": "Im046_1.tif",
+          "prepared_file": "Im046_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "6c6a0f346444fec8052867fce369bd2d5ece7abe397cf28a4352a4ad1abab8a1"
+        },
+        {
+          "source_file": "Im193_0.tif",
+          "prepared_file": "Im193_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "bf76747166fae401e8522f55ca01ec31428cbff387ff673bdedfbbb17bf5154e"
+        },
+        {
+          "source_file": "Im081_1.tif",
+          "prepared_file": "Im081_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "a3742988b9caa185e5979c16004d9a873c536d209b72db9986f85deaaa63160b"
+        },
+        {
+          "source_file": "Im015_1.tif",
+          "prepared_file": "Im015_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "72de25767f83fa567964fe9c04fbdaafe0c002f491edac603e0c98db983c0c5f"
+        },
+        {
+          "source_file": "Im117_1.tif",
+          "prepared_file": "Im117_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "ea327fe024a28108390dacf8ef0a67012370a9aecd57ea6f8bd8e69efea53759"
+        },
+        {
+          "source_file": "Im251_0.tif",
+          "prepared_file": "Im251_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "6fb64ec1bc83f99adc20bcdf39a1ca70646797f42078a7692e48a13ef2a65184"
+        },
+        {
+          "source_file": "Im176_0.tif",
+          "prepared_file": "Im176_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "9cb829dbe78b06d9176ad26370bece465187633fce2453db3a88b460ad768ae3"
+        },
+        {
+          "source_file": "Im124_1.tif",
+          "prepared_file": "Im124_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "069d496d7ac40a2abc321873d51ecdf67fa19f91ecd431292c14662aadf288fd"
+        },
+        {
+          "source_file": "Im112_1.tif",
+          "prepared_file": "Im112_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "272953ffbf71d1713ab9e4365250ad82054da6dffed85692cc87d7f434ff2700"
+        },
+        {
+          "source_file": "Im254_0.tif",
+          "prepared_file": "Im254_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "adb66fa2ee58e3e3b65485c6072501b53990ddef83e0807d0212f0554a8c7253"
+        },
+        {
+          "source_file": "Im134_0.tif",
+          "prepared_file": "Im134_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "6a1826a9999beb22781856838d5f210a58d796fab12bf2e9b5f23fdadf7565ac"
+        },
+        {
+          "source_file": "Im256_0.tif",
+          "prepared_file": "Im256_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "c7cb132fcad190d44d3a51a6be60a606c510d5d4466c620d26387f33e22690de"
+        },
+        {
+          "source_file": "Im186_0.tif",
+          "prepared_file": "Im186_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "9b47a6e5dc57666796fc0353c2f3256fe491d47b8980b800ce843d5f5217aa0a"
+        },
+        {
+          "source_file": "Im053_1.tif",
+          "prepared_file": "Im053_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "46d4d1560c6f34cb63068e58b409bc7d7a2c6e0b4ed3c3c03966d5e2f6d46aba"
+        },
+        {
+          "source_file": "Im228_0.tif",
+          "prepared_file": "Im228_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "0f7b29db9919a964244fed097bcc1303f783f7e787d33daeffc37a8dd8c6c455"
+        },
+        {
+          "source_file": "Im250_0.tif",
+          "prepared_file": "Im250_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "8f72226b2e65c12b67f6a29a293a17cb77621967a9e173212575609bd25428dd"
+        },
+        {
+          "source_file": "Im020_1.tif",
+          "prepared_file": "Im020_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "7873177cad8c83ee0fa981bc6286edbe621dd40cf746e0fd8218c946df286e55"
+        },
+        {
+          "source_file": "Im236_0.tif",
+          "prepared_file": "Im236_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "2dce6751ce2fd4b938f413228a4c1dcc85d70ddb263ecfc5624d91343261f484"
+        },
+        {
+          "source_file": "Im208_0.tif",
+          "prepared_file": "Im208_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "d3e42ebd32f3bbf7c572356c90737ebb11c2f9bdeade84f41f209eb53882b413"
+        },
+        {
+          "source_file": "Im064_1.tif",
+          "prepared_file": "Im064_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "b032009137a69371434cfa1a8dc1d31e8f4681cc379af254318e8618a0d0e875"
+        },
+        {
+          "source_file": "Im073_1.tif",
+          "prepared_file": "Im073_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "be3b610743a365c49fbb6081aa57e0b48bf28d6ece3fb8babbfa7ead3260b9b8"
+        },
+        {
+          "source_file": "Im056_1.tif",
+          "prepared_file": "Im056_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "9dab6ea4cdb72b38eaec0b1145cb34a50a07b412e6a6395bb1d76f0cc2e0eb9f"
+        },
+        {
+          "source_file": "Im179_0.tif",
+          "prepared_file": "Im179_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "a88c5ed8f877ce09a35c366e52c7789a986506ce83c8cb34b67522ba008c5c38"
+        },
+        {
+          "source_file": "Im197_0.tif",
+          "prepared_file": "Im197_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "d06d8848f44f8a307dc978f9e21174b05a427aaeb890c1404cdcd98c71a28be8"
+        },
+        {
+          "source_file": "Im050_1.tif",
+          "prepared_file": "Im050_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "81376f0f4409ca45f14b90662251dcfaa496fb2062a1be0fe6d4ac69c2dc12c9"
+        },
+        {
+          "source_file": "Im125_1.tif",
+          "prepared_file": "Im125_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "0777d2a6eef49172c2cc23dbbc8141b0b1db6b22bfbcda30b332f08496b637d9"
+        },
+        {
+          "source_file": "Im211_0.tif",
+          "prepared_file": "Im211_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "8ce6d3cad23b14918f019ea6339617ac2320e252c65eaa214be34da68ba03275"
+        },
+        {
+          "source_file": "Im215_0.tif",
+          "prepared_file": "Im215_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "3360b0ecf0678e45ef979f00bb6c06d03cb764cff562cb0764c24385060bd06f"
+        },
+        {
+          "source_file": "Im004_1.tif",
+          "prepared_file": "Im004_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "4ecea1d493c482fd88a0665fa0e9a84d9a171f10409177465c97a7e503686a93"
+        },
+        {
+          "source_file": "Im026_1.tif",
+          "prepared_file": "Im026_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "3262822a5e71190cad7f4f49f8a4ade670448e8ff6eddab0ee6b735eafae7cba"
+        },
+        {
+          "source_file": "Im187_0.tif",
+          "prepared_file": "Im187_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "f729364aed74112d809c6ba90bbb0baf2f70784b38aa71cbace55b92bfceb5fd"
+        },
+        {
+          "source_file": "Im063_1.tif",
+          "prepared_file": "Im063_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "607c717bc5054d80bf6091fb321b976a0bed153d3ec4c289bfeeca32087f8f6c"
+        },
+        {
+          "source_file": "Im135_0.tif",
+          "prepared_file": "Im135_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "4b6e03acc49baff34f3d7bf7341cdf8f3895dda7cd4fac8bc74a804bf18353f4"
+        },
+        {
+          "source_file": "Im189_0.tif",
+          "prepared_file": "Im189_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "c9502f44f9a40f5a3f8c8925d6a23f64a4a39d1e9fe6d1631b378a85d0d444c8"
+        },
+        {
+          "source_file": "Im200_0.tif",
+          "prepared_file": "Im200_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "b9d86ff6606356d4e5c4b71ac29ef37a115ffa2b3b0995f4fd5af5c23c398fab"
+        },
+        {
+          "source_file": "Im243_0.tif",
+          "prepared_file": "Im243_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "7eb7ec669eb8e83ef0c44e4a28ea82b5d5e8ef1658d3d94b0734eecad9ca263c"
+        },
+        {
+          "source_file": "Im168_0.tif",
+          "prepared_file": "Im168_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "7d31e7d9e6cfd276bd6b07ee1bd49909796c9db66be25da253b06889d440fff2"
+        },
+        {
+          "source_file": "Im096_1.tif",
+          "prepared_file": "Im096_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "349609706eb272e59bc57ab195531d1b413373078fd457214b8e8ab9e6d7aa2f"
+        },
+        {
+          "source_file": "Im067_1.tif",
+          "prepared_file": "Im067_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "c4664d681e0c7b35ebca0c389bc6ed56fccbfb85efa5360b13ffe6f7dbbaa75a"
+        },
+        {
+          "source_file": "Im138_0.tif",
+          "prepared_file": "Im138_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "f80749695dbf4c72a6f0468cf86eb7ffa1ec79d60491195181f0a870c544d6f5"
+        },
+        {
+          "source_file": "Im150_0.tif",
+          "prepared_file": "Im150_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "557a64f91273330f974a1a8f8bb0b549e39ef2c8a893e66b77317fff3531db59"
+        },
+        {
+          "source_file": "Im108_1.tif",
+          "prepared_file": "Im108_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "aec5f63e45cba0d6881eda39f96fb8e3db9db46aa3e860322e44a30c53abc7eb"
+        },
+        {
+          "source_file": "Im231_0.tif",
+          "prepared_file": "Im231_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "8d879e7c931bd37a34518aaddac7c7712f2223bacc52d1ef420c2c5083248b27"
+        },
+        {
+          "source_file": "Im163_0.tif",
+          "prepared_file": "Im163_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "3b79288c173a638be9f215d472c26d556658032502a427ef70cacd134ffcb8fc"
+        },
+        {
+          "source_file": "Im071_1.tif",
+          "prepared_file": "Im071_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "3e44e7bfe3f11a202ba9e5d2b0805ba0b53c70672c62a7d63e0cd6414436d440"
+        },
+        {
+          "source_file": "Im137_0.tif",
+          "prepared_file": "Im137_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "fab7542ba316a1ef8d6b3a5b52b9eb8b6793ec6a66c32ba4c63574a4e517910f"
+        },
+        {
+          "source_file": "Im219_0.tif",
+          "prepared_file": "Im219_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "03c51af09d5a31f77f2f00c39844eae9b5cfa0b66631cb8cfd52589192f10cc7"
+        },
+        {
+          "source_file": "Im098_1.tif",
+          "prepared_file": "Im098_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "d14a635903431802f4cb5fe33d7206571a354126decf8ea94de833ab76bbd76c"
+        },
+        {
+          "source_file": "Im084_1.tif",
+          "prepared_file": "Im084_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "7456345627697ceb7e693ebea656b8ad94d73b3ce9c42914302bd769594c6b12"
+        },
+        {
+          "source_file": "Im169_0.tif",
+          "prepared_file": "Im169_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "6a9ed49fb160d689411d024e9a3455245799a26d881560731c279eb5894624f6"
+        },
+        {
+          "source_file": "Im029_1.tif",
+          "prepared_file": "Im029_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "06e28f55080d694e9b9fa1ea40c58e2d660c2bfffccc6f84edccf8d94aa31ee3"
+        },
+        {
+          "source_file": "Im255_0.tif",
+          "prepared_file": "Im255_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "a2983718e7267fff8b5e61dfd3c05f95db6aecfdaa023fdd4169667cfd1362d7"
+        },
+        {
+          "source_file": "Im198_0.tif",
+          "prepared_file": "Im198_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "7e10c482cef071d32ecf2827b8bc17b4df7db94cfca32d07c3f915305b69e5e7"
+        },
+        {
+          "source_file": "Im177_0.tif",
+          "prepared_file": "Im177_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "c38da462b234b94a45a459b6d86e077157ebbf1af15c62c07c3b1d2da2994fb8"
+        },
+        {
+          "source_file": "Im227_0.tif",
+          "prepared_file": "Im227_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "79940b946ad98c1c0530a26c7cbd258fd8ba928d7e4b337afff50ad946cf740e"
+        },
+        {
+          "source_file": "Im120_1.tif",
+          "prepared_file": "Im120_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "4177f801816d2e01a8df9e5f3853e883b19bde62b8fc208b2d8ce3397f3ab89e"
+        },
+        {
+          "source_file": "Im247_0.tif",
+          "prepared_file": "Im247_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "f5f6b6735c34d2382b0181e83e3689e7f5ad2c314469162cbae0129b2a2b44d0"
+        },
+        {
+          "source_file": "Im030_1.tif",
+          "prepared_file": "Im030_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "90d019a5b86d948e9605215df2d5e0a5b167c4d94bb81b3baf5997de2233328a"
+        },
+        {
+          "source_file": "Im017_1.tif",
+          "prepared_file": "Im017_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "e94c7cd7a9a9f9d7214ffa513a8ba19e05e3d75b3fb2f5c16ffed22bbad0a54d"
+        },
+        {
+          "source_file": "Im239_0.tif",
+          "prepared_file": "Im239_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "28c4682c8a1e4c9d407b4b18d25f44a67a10b34112a80e49c7e14637a6e0f4cd"
+        },
+        {
+          "source_file": "Im010_1.tif",
+          "prepared_file": "Im010_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "fe798b40b3f70a3ed381b9835566e716eb3249ee8fd57b5b098c9efa69d51e79"
+        },
+        {
+          "source_file": "Im184_0.tif",
+          "prepared_file": "Im184_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "eb6b013b45e8f6c5d311a8d4cc749ef25749b9ce000c6d55434edb7ce9ae4e97"
+        },
+        {
+          "source_file": "Im083_1.tif",
+          "prepared_file": "Im083_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "2a302252a08a210d31d5f35a6b63d5f18523840ca9ebb237e3eee6bc89fd2a30"
+        },
+        {
+          "source_file": "Im244_0.tif",
+          "prepared_file": "Im244_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "b901d15facccb39001beee8296c8bf45b31622c6a745b87ef874059714f9e2b4"
+        },
+        {
+          "source_file": "Im085_1.tif",
+          "prepared_file": "Im085_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "80a55497d35054584cec9e42c9ad01c7873a9fc3334ccc6eb8ad3eba9289a795"
+        },
+        {
+          "source_file": "Im106_1.tif",
+          "prepared_file": "Im106_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "a245e8f41ad7e2a27cdabae93f8558d0ce76530d551cb0d27077c132d908db65"
+        },
+        {
+          "source_file": "Im100_1.tif",
+          "prepared_file": "Im100_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "1e17dbcb74fd11e323368162021dd0cf1589de6cacd79be456ac1679626d68cb"
+        },
+        {
+          "source_file": "Im167_0.tif",
+          "prepared_file": "Im167_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "1e1a6797ff7a1885fe736f885c8c13444b5536b475f1c38a27008b352bdd1025"
+        },
+        {
+          "source_file": "Im041_1.tif",
+          "prepared_file": "Im041_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "192a6e1b4f41a3e4da0191c14fbe5c04f1dc60c8a2b631cf85d9424fade2e781"
+        },
+        {
+          "source_file": "Im093_1.tif",
+          "prepared_file": "Im093_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "632989777ec9c588667e6bccd9b26c6f9f6f1625359ccd90673c592f9d336769"
+        },
+        {
+          "source_file": "Im201_0.tif",
+          "prepared_file": "Im201_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "83f3e4d489a2406f86b7888289fdfc59081f78b85b75fd9ad3f3bfb9bc83da27"
+        },
+        {
+          "source_file": "Im097_1.tif",
+          "prepared_file": "Im097_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "0c9f76fda373fc3ac52a9a4d7b9ef95953f644f2e4e93f75a4afebf0b2a0bc5b"
+        },
+        {
+          "source_file": "Im049_1.tif",
+          "prepared_file": "Im049_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "008c954cf5451c0f4ec998d45fdb7b4faa56d0e9f810c94047e751083f382510"
+        },
+        {
+          "source_file": "Im141_0.tif",
+          "prepared_file": "Im141_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "b473eb165f4b8018ea6e2cb6e1d61d377f288d3b44955f800a64e54ce37fed42"
+        },
+        {
+          "source_file": "Im016_1.tif",
+          "prepared_file": "Im016_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "7a2a41b89fbc9f771951772da50f56a06c0cce50379d97e3ba974a9e81e1d92a"
+        },
+        {
+          "source_file": "Im076_1.tif",
+          "prepared_file": "Im076_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "94218d1f19823255a6f7a7adf6c58bab5d9fce258d267d58a448d74fde83abad"
+        },
+        {
+          "source_file": "Im079_1.tif",
+          "prepared_file": "Im079_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "56b3d8621a57adbdde27ffc15090b960ba1da1f57dd64c4ff5759cddab7469d7"
+        },
+        {
+          "source_file": "Im258_0.tif",
+          "prepared_file": "Im258_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "3af1e30717c94d319030a580f4174987c84984472c724b7ed5c14e930ef35dfb"
+        },
+        {
+          "source_file": "Im235_0.tif",
+          "prepared_file": "Im235_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "7cd6a80326f8c49f12f0b6f734fce365b3b66ce4a63bd13fae5b89d984ddb636"
+        },
+        {
+          "source_file": "Im185_0.tif",
+          "prepared_file": "Im185_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "b4d198f583ff0ba738e3d703ae30a622f84a32245a1366144abbe46dc9467b2c"
+        },
+        {
+          "source_file": "Im110_1.tif",
+          "prepared_file": "Im110_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "0435ca46d06ad5c12a3a53ed82f994c76847e0a5343a79e0efcbd25568b349ab"
+        },
+        {
+          "source_file": "Im214_0.tif",
+          "prepared_file": "Im214_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "bcfccabe89dc855a43b60519d4b1f219f21c5fea59b02b8c4929a5527285b2e7"
+        },
+        {
+          "source_file": "Im007_1.tif",
+          "prepared_file": "Im007_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "da7ee85bcb622644e10b80e4ac596a719861e7909f3096ce4c0f9405675c871b"
+        },
+        {
+          "source_file": "Im203_0.tif",
+          "prepared_file": "Im203_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "3da703fd83ad9429f71e830429ca78d35c6ce74720d054cf20a3e1515e316967"
+        },
+        {
+          "source_file": "Im119_1.tif",
+          "prepared_file": "Im119_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "add0b92d7472f39af4e3d6c162ea880e0e2c58ae36b3e2ba74d405d5887371d5"
+        },
+        {
+          "source_file": "Im109_1.tif",
+          "prepared_file": "Im109_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "b57aca1af52d9662b3fd07b6e4a8e7e9aac1c7c4b1dc0dae9053f64d18326fb5"
+        },
+        {
+          "source_file": "Im018_1.tif",
+          "prepared_file": "Im018_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "10d0747387138781b56a581ca8ea08f27fa113fa1129dff65eda9c2fb53e0c31"
+        },
+        {
+          "source_file": "Im192_0.tif",
+          "prepared_file": "Im192_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "92eabac1e1cf8b0de8bab9a48b87cb13737f15d784d04305694c3f48f55dde89"
+        },
+        {
+          "source_file": "Im013_1.tif",
+          "prepared_file": "Im013_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "6009990d974f4fc00d6c29abdd21bb8c7f1a185c364fb6b81179b68e96d9d8e4"
+        },
+        {
+          "source_file": "Im165_0.tif",
+          "prepared_file": "Im165_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "718d80ba1478e6ddc5abe90c857eca45db97f732c4dd6434581354de55b193f7"
+        },
+        {
+          "source_file": "Im166_0.tif",
+          "prepared_file": "Im166_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "7e73c8ec6e784a627cc20777160173ed69fb9c4551cd70d40b9691d32d909a61"
+        },
+        {
+          "source_file": "Im048_1.tif",
+          "prepared_file": "Im048_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "54005dd5f74501044ed52b840533be90f762c141e88cebe8a907fc783b0b6ed6"
+        },
+        {
+          "source_file": "Im058_1.tif",
+          "prepared_file": "Im058_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "df29b54e7776a472e40d21e72f6b683ce9ad179c4b2100f6c56848a3f10ab9eb"
+        },
+        {
+          "source_file": "Im181_0.tif",
+          "prepared_file": "Im181_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "f8e81118c90cd6d6902d741136d8545c766dbf8f0f10068a05475fdf4c2c407b"
+        },
+        {
+          "source_file": "Im206_0.tif",
+          "prepared_file": "Im206_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "15f1ded5235aab298bae55f7940974cd44f3e01829d7f8e59be737c659a32112"
+        },
+        {
+          "source_file": "Im122_1.tif",
+          "prepared_file": "Im122_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "c0ae0893f728ab0b925aebaf33be581c6b46d0818130c7236021d837c462c7f7"
+        },
+        {
+          "source_file": "Im225_0.tif",
+          "prepared_file": "Im225_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "6cb58f75bcab972d53d8ebbe2e4ad6fa91a764b3af667a6f4f2bd74201df3489"
+        },
+        {
+          "source_file": "Im121_1.tif",
+          "prepared_file": "Im121_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "1b2387dc85f81012baf251402c7c9c2bdc11a03c1f47084f066d27da629ea980"
+        },
+        {
+          "source_file": "Im082_1.tif",
+          "prepared_file": "Im082_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "9e729a8693ba87137e934d5850dce9536dbdca0934824d930c91167168769eaf"
+        },
+        {
+          "source_file": "Im039_1.tif",
+          "prepared_file": "Im039_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "333c579b0e4029f998ad3b2ac1dad00ea8ccbb4336513b1b7c06ffb15707867a"
+        },
+        {
+          "source_file": "Im139_0.tif",
+          "prepared_file": "Im139_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "7f057a9b93e63d750f827e91369ab7dbd2741335cb98d4b39dcb3ffb8e5464bc"
+        },
+        {
+          "source_file": "Im074_1.tif",
+          "prepared_file": "Im074_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "ea0caaff39bc830076ee9ced73a458be9256d79a905fb22e86b698a61010457f"
+        },
+        {
+          "source_file": "Im126_1.tif",
+          "prepared_file": "Im126_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "8ae81f4d68ee59eb990eb87f2b70a309b2d5f64fa460718aafe77460e0d57ac0"
+        },
+        {
+          "source_file": "Im155_0.tif",
+          "prepared_file": "Im155_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "bf4121a0b1293b631c5590b9b7d00255dc48ef13f72090b994035d70b0de622a"
+        },
+        {
+          "source_file": "Im095_1.tif",
+          "prepared_file": "Im095_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "440627695fa067e826f91b0429e136f9e048f3cd42e04f674f061eece7e71908"
+        },
+        {
+          "source_file": "Im207_0.tif",
+          "prepared_file": "Im207_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "ed57fb1eeac8ef2fb8fd6d19f2b587cbdeefe1b6404bafcccf3431425650909e"
+        },
+        {
+          "source_file": "Im009_1.tif",
+          "prepared_file": "Im009_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "865a4d3d635cfa31acce881310c6b5c0fc47ec5131af5c55e0c287a6cddf1206"
+        },
+        {
+          "source_file": "Im123_1.tif",
+          "prepared_file": "Im123_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "de29f4e616856d8bd205afb35c5cb495be838f88506365a577de43071ff6624e"
+        },
+        {
+          "source_file": "Im066_1.tif",
+          "prepared_file": "Im066_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "edc22f17e763a60129f135b321119fe78c1c5629accd9ef52bde19f41bedfd9a"
+        },
+        {
+          "source_file": "Im054_1.tif",
+          "prepared_file": "Im054_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "2969a69b3c18f770fa85069bb8426de96fc8f94bc289e3f8663be4490278f9ae"
+        },
+        {
+          "source_file": "Im088_1.tif",
+          "prepared_file": "Im088_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "8cceb864333ae42820009929c00006f5bd56853669a2d8c04e3120e0e11e949d"
+        },
+        {
+          "source_file": "Im059_1.tif",
+          "prepared_file": "Im059_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "5959bd09ff6bc02a79d725ae7dfbc97f7039b7c4c546b0a564167f74785ccb69"
+        },
+        {
+          "source_file": "Im148_0.tif",
+          "prepared_file": "Im148_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "57fab285b5f4556ed7579ff372624eb08ab36577db22aa289e79a5ede9c8b9a3"
+        },
+        {
+          "source_file": "Im175_0.tif",
+          "prepared_file": "Im175_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "9fb2a8fdd9bcfb20d6da09cb61378e56c1e91472900607ad781d32aaa26f17f9"
+        },
+        {
+          "source_file": "Im242_0.tif",
+          "prepared_file": "Im242_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "766931ce34fe2a11f5329cb5b01c3f8bd6f7929f1496e177e95bd60f485eb9ec"
+        },
+        {
+          "source_file": "Im023_1.tif",
+          "prepared_file": "Im023_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "b08c713898d9a416f428002a55f0887737735dbaed7a4775ef6da49e79bf115f"
+        },
+        {
+          "source_file": "Im107_1.tif",
+          "prepared_file": "Im107_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "667da88b1f13a3304240e39371f2ff056d84285b28ced9cad204889032d2fbe3"
+        },
+        {
+          "source_file": "Im196_0.tif",
+          "prepared_file": "Im196_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "067e35ec43b95c690bde387a4d20f659e6e7a5ec0a72d16b881e3d392589aeba"
+        },
+        {
+          "source_file": "Im045_1.tif",
+          "prepared_file": "Im045_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "74ff4d38f5782859621c3755abe4187c782388dd3f6d327ecccab22cdb8ece2a"
+        },
+        {
+          "source_file": "Im055_1.tif",
+          "prepared_file": "Im055_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "967a7e16a27f6fbe169bf343d56bc89ada0bdb3b40a04c13903822f6d652969f"
+        },
+        {
+          "source_file": "Im092_1.tif",
+          "prepared_file": "Im092_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "edebdc15fabd68f03b4df134291577be1cc0f123c79c8f82bfabe0361b841a34"
+        }
+      ]
+    },
+    "val": {
+      "total_count": 39,
+      "class_0_count": 20,
+      "class_1_count": 19,
+      "files": [
+        {
+          "source_file": "Im011_1.tif",
+          "prepared_file": "Im011_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "2ba4bbd310fc4130725beaa9b55599d4daa9eb31f6ef3292b1e895c315b74ad2"
+        },
+        {
+          "source_file": "Im052_1.tif",
+          "prepared_file": "Im052_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "5d34143266d141333f45975ed5bcf9eefd5505de6abaa829800d850e63da3a38"
+        },
+        {
+          "source_file": "Im075_1.tif",
+          "prepared_file": "Im075_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "19e53d7173d31889c0e74def081d321d7ae220d2f11eb1d8c19287c489de4394"
+        },
+        {
+          "source_file": "Im157_0.tif",
+          "prepared_file": "Im157_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "8a3f95883a201f903953a2b047d72c922424006343277c7452e5d7cab9466605"
+        },
+        {
+          "source_file": "Im116_1.tif",
+          "prepared_file": "Im116_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "9998a0adb7b3a139baedd8f5abde4f276c19441a7ed986f765d8d4cd59e7dc30"
+        },
+        {
+          "source_file": "Im132_0.tif",
+          "prepared_file": "Im132_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "127497b701987ef0bb676266c32a4bcd5e16cbaaacf20d8de688cf07bd19a602"
+        },
+        {
+          "source_file": "Im061_1.tif",
+          "prepared_file": "Im061_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "263a5a30ce8150326e3c7c77b6e9c68f758eef1e21e2bcda221ace4093eb1639"
+        },
+        {
+          "source_file": "Im195_0.tif",
+          "prepared_file": "Im195_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "9feffbdb44cffaf0cefd22b67a00004c43147c01c6d38996d88ba7f4cbd4cbbe"
+        },
+        {
+          "source_file": "Im241_0.tif",
+          "prepared_file": "Im241_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "3816ff38e077faded47775be576c34423938b9b7fd17a8e69ee71f654b0286fc"
+        },
+        {
+          "source_file": "Im006_1.tif",
+          "prepared_file": "Im006_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "a3bf482c28f4e5c9509cf5bd563b9959d8f92530c61dc16780f0c25136e98785"
+        },
+        {
+          "source_file": "Im060_1.tif",
+          "prepared_file": "Im060_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "567d620779295283bf45d5b59197db3823a742795ca0d48af49fe97b6a5c50a0"
+        },
+        {
+          "source_file": "Im114_1.tif",
+          "prepared_file": "Im114_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "1c514f6ad6665f4b4b70a73764352b94d8ff221a24c7902cf1ceae0dba43c7fe"
+        },
+        {
+          "source_file": "Im028_1.tif",
+          "prepared_file": "Im028_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "476685f2525239ce6ecd4c4f825a613fc5585389eac297dc33ce764eb54aeebf"
+        },
+        {
+          "source_file": "Im002_1.tif",
+          "prepared_file": "Im002_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "2a36039a5dd2ac65201208100d7b91b5d1b1b8e9c7561f981a37ef6ff6a034e7"
+        },
+        {
+          "source_file": "Im143_0.tif",
+          "prepared_file": "Im143_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "077bec8f8ee93086e92e9c6fba07c511e967f2f8fc0ac45bc2b5f25cf0e4a358"
+        },
+        {
+          "source_file": "Im212_0.tif",
+          "prepared_file": "Im212_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "f131434a6f5fde14007de20f896a5d63111d0934f5f3bc66937c9048d08889fe"
+        },
+        {
+          "source_file": "Im204_0.tif",
+          "prepared_file": "Im204_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "a640f163685f61d4e3201f4af2261b3524a4fd25d539018764e4c0c75948abd4"
+        },
+        {
+          "source_file": "Im024_1.tif",
+          "prepared_file": "Im024_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "ae956ca3e5fb80d0e4603d417e1e6d515cb628912f66b3be18e92b7d54ed9a79"
+        },
+        {
+          "source_file": "Im246_0.tif",
+          "prepared_file": "Im246_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "d28b45f382d06b36aa7b59d4cece1a1508692bc4e6c1fd34c908367fe349d913"
+        },
+        {
+          "source_file": "Im131_0.tif",
+          "prepared_file": "Im131_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "d4952bc9b6d363e9fe01a3359e0e928e6367f19b901ad056e1f91f467c429137"
+        },
+        {
+          "source_file": "Im164_0.tif",
+          "prepared_file": "Im164_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "af030ab2e06ebd67a2d4cbc1bec8a70b58d6313950f1381b690815246161fd62"
+        },
+        {
+          "source_file": "Im032_1.tif",
+          "prepared_file": "Im032_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "5a7ab96475c7b7b3385c9a9fd9dd1df1039535275d29806acd6296ddeca03a85"
+        },
+        {
+          "source_file": "Im022_1.tif",
+          "prepared_file": "Im022_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "8ca6d31406641190468173e84e1b70e74c9f9fe3c20b2e515b6af0e4cf2c80c0"
+        },
+        {
+          "source_file": "Im069_1.tif",
+          "prepared_file": "Im069_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "8d9f1033360de7973584c91b585f713bd3ae4fe7aedf7ea1974662f5de5badf7"
+        },
+        {
+          "source_file": "Im057_1.tif",
+          "prepared_file": "Im057_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "c86905e4b0b9c0faa00bcfcfbf65a02d5407745a1b95abf79a3e9929dbaae463"
+        },
+        {
+          "source_file": "Im127_1.tif",
+          "prepared_file": "Im127_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "9db8639db966d58684888aae225d2a194b44baf167d703cb96a3964319689f0c"
+        },
+        {
+          "source_file": "Im226_0.tif",
+          "prepared_file": "Im226_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "9b2473749564e66a827d8eefac6ff111095a0c36ccf1c2fd8858d55e594ea4bf"
+        },
+        {
+          "source_file": "Im183_0.tif",
+          "prepared_file": "Im183_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "e68e5c70662421cce36a11ab476e146f152c23c58a9db98d56b95f2b97501e8e"
+        },
+        {
+          "source_file": "Im253_0.tif",
+          "prepared_file": "Im253_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "77271cad5399304071f26f05ce24940da54a9016fa35e970677c6b311ddeae7a"
+        },
+        {
+          "source_file": "Im012_1.tif",
+          "prepared_file": "Im012_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "6cd01e9514f5aa4ec3ef2969f6384955bf1dfbde74e90c8ee72b52ca191635ab"
+        },
+        {
+          "source_file": "Im160_0.tif",
+          "prepared_file": "Im160_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "e8844cb15df9860b394ad0e081de861541093f7f692c8bf3dae32799ea40bb83"
+        },
+        {
+          "source_file": "Im210_0.tif",
+          "prepared_file": "Im210_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "800f5c9109fdadd407cd44cf6090455290a33aee16b599a0516e8c35bedc0ecd"
+        },
+        {
+          "source_file": "Im142_0.tif",
+          "prepared_file": "Im142_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "862b60bda865b4448274c46896e5a62c54d2fc2dd4925335a00040ff06c20429"
+        },
+        {
+          "source_file": "Im070_1.tif",
+          "prepared_file": "Im070_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "0b23a626d6aecb71129f8f2579a2750633e8ce9291556e67ee31733250e72225"
+        },
+        {
+          "source_file": "Im034_1.tif",
+          "prepared_file": "Im034_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "2170f33ccab6c3c7c3eecefeb4fd78d3b7f8c5fe2de0d48ddc446a24425d8d95"
+        },
+        {
+          "source_file": "Im144_0.tif",
+          "prepared_file": "Im144_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "56b51582764e1fc35d1ae56c4508817d4851e197340672c374a56e52f7495834"
+        },
+        {
+          "source_file": "Im252_0.tif",
+          "prepared_file": "Im252_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "44b39cc3510d804453fda557f72f44662b289c08bdf76dc23078a4b357761f90"
+        },
+        {
+          "source_file": "Im190_0.tif",
+          "prepared_file": "Im190_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "921d3bdcf81e1211f09adb56891b07b646906b0b2b88a5d3ba916f836097b809"
+        },
+        {
+          "source_file": "Im146_0.tif",
+          "prepared_file": "Im146_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "db484bfa669a236a3f241f82d6a714dd5e0f0ce6f3484fabb2acc373d7418e71"
+        }
+      ]
+    },
+    "test": {
+      "total_count": 39,
+      "class_0_count": 19,
+      "class_1_count": 20,
+      "files": [
+        {
+          "source_file": "Im217_0.tif",
+          "prepared_file": "Im217_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "97d3011cdd52dc5c50946c7d99c8fc705e008b162271ddff5e0e350ef820e158"
+        },
+        {
+          "source_file": "Im237_0.tif",
+          "prepared_file": "Im237_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "176f92b133d5e9e01d3646a8f344bc9b0c35d35320487722bbc6b119c88ff434"
+        },
+        {
+          "source_file": "Im260_0.tif",
+          "prepared_file": "Im260_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "2d633061c6218c8eb0a998d1c0539d62ad60ad73d61bcbcd9603f4e29e8310ec"
+        },
+        {
+          "source_file": "Im182_0.tif",
+          "prepared_file": "Im182_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "e7c8b68a55529f51a06f550ab65f8cb426fc2c02b53ff3e7d4394e8fa94c357f"
+        },
+        {
+          "source_file": "Im218_0.tif",
+          "prepared_file": "Im218_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "d3422ace28c3dbb041808443d3c3cefd76251eead74f95f1245d274bc4dbc7ff"
+        },
+        {
+          "source_file": "Im091_1.tif",
+          "prepared_file": "Im091_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "abb294b1a5a9d394d5d5951ae47c2b07f24d86510199fa22403c5c70290ea73a"
+        },
+        {
+          "source_file": "Im154_0.tif",
+          "prepared_file": "Im154_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "f3b9861ce1f065ef66ad65a67d24d6a7c351e7029039968d97e39ddbfe0af1ef"
+        },
+        {
+          "source_file": "Im037_1.tif",
+          "prepared_file": "Im037_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "afd969565ad635e1d5a1431aa2f96b659c9faeb471ba78102d0390d63da250b1"
+        },
+        {
+          "source_file": "Im223_0.tif",
+          "prepared_file": "Im223_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "4164f3129b8210ac8eaad73f41a83fe8e79e811a8d8e0aa9622b576dfd10661d"
+        },
+        {
+          "source_file": "Im233_0.tif",
+          "prepared_file": "Im233_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "d6052caf46ba4e242edafd3c4bf344e2984c9f1aa2a3b12041b6553b66837b7d"
+        },
+        {
+          "source_file": "Im078_1.tif",
+          "prepared_file": "Im078_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "ab337729ec45b0108ed4490d82fd45fab2f52168461f9cf0b1e59cf3e9091236"
+        },
+        {
+          "source_file": "Im062_1.tif",
+          "prepared_file": "Im062_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "ced9ce38aa8ee16fae180ead7ce3c2274265fcbf7b171c2ccfa5e4d92f34440a"
+        },
+        {
+          "source_file": "Im027_1.tif",
+          "prepared_file": "Im027_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "02b5c00b2392afe24993931e1022a8e9364af20ff815e42f56d32ba4ed4f7b7e"
+        },
+        {
+          "source_file": "Im191_0.tif",
+          "prepared_file": "Im191_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "6c442a18171b5ed19c099ff4c294af34d687f4f0c6bd15b4dfbe8bb0b185a47d"
+        },
+        {
+          "source_file": "Im099_1.tif",
+          "prepared_file": "Im099_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "ebbbd663ff4e5431f9023ce4b2f3589be2e8523d69c06e483430a2d8cea75a2b"
+        },
+        {
+          "source_file": "Im205_0.tif",
+          "prepared_file": "Im205_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "47e6a4c315cbeb29c69501130104ea41f4cba61a0b7f4ac4b8b2265cb1ec94ef"
+        },
+        {
+          "source_file": "Im001_1.tif",
+          "prepared_file": "Im001_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "28845c853b8cd84ecb98f09add5721958d04ad5c2e4926ea631bba9e70e3a0bf"
+        },
+        {
+          "source_file": "Im014_1.tif",
+          "prepared_file": "Im014_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "cb9e9920a9b4a96f2b2a88711e05d652538f9a09b56a58d3da12f6c41b1e69f7"
+        },
+        {
+          "source_file": "Im133_0.tif",
+          "prepared_file": "Im133_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "8bdf5cfeeafcdc4deb5caaa272c4f03da7ddd9224cfee11a5a459c1dde8b2e30"
+        },
+        {
+          "source_file": "Im104_1.tif",
+          "prepared_file": "Im104_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "64a9a7c4190f5a0203339e0185061ab473993440f65aff067626fff3020ddbf8"
+        },
+        {
+          "source_file": "Im005_1.tif",
+          "prepared_file": "Im005_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "b129b1ea5178e4bcea0ca63333d60654e6c8fe0b80ef91c667bc4789cc65f416"
+        },
+        {
+          "source_file": "Im213_0.tif",
+          "prepared_file": "Im213_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "6e9c86c7ca2af29488820ed1ae29799502a70da4189664737da5bf3a13f1501e"
+        },
+        {
+          "source_file": "Im090_1.tif",
+          "prepared_file": "Im090_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "5e6989ec1731ceedc8dd24b77664acc896acdeceaeb7130d7e0426c612af4ce5"
+        },
+        {
+          "source_file": "Im086_1.tif",
+          "prepared_file": "Im086_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "0063f09fb3136f63b28b75c9d45afdb4a71a4af5f07c105d83cc905fc007cbeb"
+        },
+        {
+          "source_file": "Im152_0.tif",
+          "prepared_file": "Im152_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "3562c5af519b4d2307248fa4ab2766f9a35be242b50dbbb3e9656338dc7c5107"
+        },
+        {
+          "source_file": "Im234_0.tif",
+          "prepared_file": "Im234_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "e14cb482fa76d203efa7d501d8d5d3fa41fbc4c884c61e403ae704d3145d73f1"
+        },
+        {
+          "source_file": "Im248_0.tif",
+          "prepared_file": "Im248_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "c3cf6053ccc6893f3328b9298450c204638d95e8d87ac89eea50579390a58731"
+        },
+        {
+          "source_file": "Im103_1.tif",
+          "prepared_file": "Im103_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "0a5fec937dc33a65e12409ef149e688a7d92b8cda6c67600fef43e1c2c6b3c61"
+        },
+        {
+          "source_file": "Im035_1.tif",
+          "prepared_file": "Im035_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "065ae4afaf9b0c0a13c8a53bde8a7b08113066033cebab4df850015a4662d3eb"
+        },
+        {
+          "source_file": "Im065_1.tif",
+          "prepared_file": "Im065_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "156593ef55b6b58ee71be4c76984b57d7d75c62c562629d91c4be804fb05c99f"
+        },
+        {
+          "source_file": "Im003_1.tif",
+          "prepared_file": "Im003_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "c9a5135ac0fcee51e1216a5c45c606de4dd539ae00e06d30c192f7e2e08fc77d"
+        },
+        {
+          "source_file": "Im145_0.tif",
+          "prepared_file": "Im145_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "2cd02ee77c22c8caa5f77465b6d10bb154b04ca6b09ab5e217267f1ec54378dc"
+        },
+        {
+          "source_file": "Im151_0.tif",
+          "prepared_file": "Im151_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "b023f7d1f6a01490c29bc4b223d42c6cf57eca0e37d129d434f56c35f295eaeb"
+        },
+        {
+          "source_file": "Im044_1.tif",
+          "prepared_file": "Im044_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "96b6b13af5105452a376fa749d0dcd1fdf670b7b1459e34dcc0e59e887b2a57d"
+        },
+        {
+          "source_file": "Im128_1.tif",
+          "prepared_file": "Im128_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "f18ca5a82eed249959e588753777cdb356695a22154d26c83958e53bc80144d5"
+        },
+        {
+          "source_file": "Im230_0.tif",
+          "prepared_file": "Im230_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "ec51708083dbf1b0df0256eca61c3275ef8597bab369688953d9b3ce6bab4971"
+        },
+        {
+          "source_file": "Im047_1.tif",
+          "prepared_file": "Im047_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "a33008857fba111e8af58c89e12112a3edf725cc573c79cb75f5d50a55d2e635"
+        },
+        {
+          "source_file": "Im202_0.tif",
+          "prepared_file": "Im202_0.png",
+          "label": 0,
+          "class_name": "normal",
+          "sha256": "c85a319b60ee65a6d5f261f5ca5f66cceb6b3a8699a7b5f2dbe3d6966060c14a"
+        },
+        {
+          "source_file": "Im101_1.tif",
+          "prepared_file": "Im101_1.png",
+          "label": 1,
+          "class_name": "blast",
+          "sha256": "0c7f68efa39b0c41099b14305be44d718f2411285659ddc4a56eb4cb3267821c"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "test_timestamp": "2026-11-23 19:26:02 UTC",
+  "total_tests": 14,
+  "passed_tests": 14,
+  "hardware_testing_note": "Automated test executed with simulated high-resolution USB microscope frames (1080p UVC mock) and headless browser DOM inspection. Physical USB microscope hardware was NOT attached during this automated run and was verified via driver/UVC mock architecture.",
+  "test_results": {
+    "test_1_sample_selection": {
+      "status": "PASSED",
+      "sample": "Im003_1.png",
+      "predicted_class": "Lymphoblast (ALL Leukemia)",
+      "confidence": 86.99
+    },
+    "test_2_image_upload": {
+      "status": "PASSED",
+      "uploaded_filename": "Im133_0.png",
+      "predicted_class": "Normal Lymphocyte (Healthy)",
+      "confidence": 90.68
+    },
+    "test_3_camera_enumeration": {
+      "status": "PASSED",
+      "elements_found": [
+        "leukemiaCameraDeviceSelect",
+        "refreshLeukemiaCameraDevices",
+        "enumerateDevices"
+      ]
+    },
+    "test_4_permission_flow": {
+      "status": "PASSED",
+      "permission_checks": "Verified constraints, fallback resolution, and NotAllowedError prompt"
+    },
+    "test_5_live_preview": {
+      "status": "PASSED",
+      "video_element": "leukemiaMicroscopeVideo",
+      "status_bar": "leukemiaMicroscopeStatusBar"
+    },
+    "test_6_camera_switching": {
+      "status": "PASSED",
+      "switching_handler": "onCameraDeviceChange(scope) with deviceId re-initialization"
+    },
+    "test_7_capture_mechanism": {
+      "status": "PASSED",
+      "canvas": "microscopeCaptureCanvas",
+      "quality_heuristics": "computeCanvasQualityHeuristics"
+    },
+    "test_8_captured_preview": {
+      "status": "PASSED",
+      "preview_section": "leukemiaCapturedPreviewSection",
+      "preview_image": "leukemiaCapturedPreviewImg"
+    },
+    "test_9_retake": {
+      "status": "PASSED",
+      "retake_handler": "retakeMicroscopeFrame(scope) resets blob and revokes object URL"
+    },
+    "test_10_analyze_captured_image": {
+      "status": "PASSED",
+      "capture_source": "USB Microscope Capture",
+      "input_resolution": "1920x1080 px",
+      "predicted_class": "Lymphoblast (ALL Leukemia)",
+      "confidence": 79.73
+    },
+    "test_11_routing_isolation": {
+      "status": "PASSED",
+      "model_architecture": "EfficientNetB0 Transfer Learning",
+      "zero_yolo": true,
+      "zero_malaria_cnn": true
+    },
+    "test_12_pdf_generation": {
+      "status": "PASSED",
+      "pdf_size_bytes": 373561,
+      "source_label_present": true,
+      "zero_malaria_terms": true
+    },
+    "test_13_invalid_frame_rejection": {
+      "status": "PASSED",
+      "empty_rejected": true,
+      "black_frame_rejected": true,
+      "blank_frame_rejected": true,
+      "corrupt_frame_rejected": true
+    },
+    "test_14_malaria_regression": {
+      "status": "PASSED",
+      "valid_rbcs": 195,
+      "parasitemia_percent": 37.9487,
+      "run_id": "run_20261124_005438_IMG_20150819_133447_fs_finetuned_raw_raw_046d97"
+    }
+  }
+}

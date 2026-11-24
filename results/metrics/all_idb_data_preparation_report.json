@@ -1,0 +1,32 @@
+{
+  "preparation_timestamp": "2026-11-21T22:45:00+05:30",
+  "source_dataset": "D:/smartcell/ALL_IDB2/img",
+  "target_dataset": "D:\\smartcell\\dataset_all",
+  "random_seed": 42,
+  "total_raw_images": 260,
+  "excluded_duplicates": [
+    {
+      "duplicate_file": "Im257_0.tif",
+      "original_file": "Im223_0.tif",
+      "sha256": "fbe38fc851c0a5a26b41b3768ea9dee573f3670c4e649494a41b0d51e91d26bf"
+    }
+  ],
+  "total_unique_images": 259,
+  "splits": {
+    "train": {
+      "count": 181,
+      "class_0_normal": 90,
+      "class_1_blast": 91
+    },
+    "val": {
+      "count": 39,
+      "class_0_normal": 20,
+      "class_1_blast": 19
+    },
+    "test": {
+      "count": 39,
+      "class_0_normal": 19,
+      "class_1_blast": 20
+    }
+  }
+}

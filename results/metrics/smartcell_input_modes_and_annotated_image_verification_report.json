@@ -1,0 +1,229 @@
+{
+  "timestamp": "2026-10-13T09:18:38",
+  "verification_environment": {
+    "test_execution_mode": "automated_regression_and_http_integration_tests",
+    "physical_usb_microscope_attached": false,
+    "note": "All tests in this verification suite were executed automatically against real dataset images (full-smear NIH-NLM microscope images and segmented single-cell RBC images) via the SmartCell HTTP API and pipeline; no physical USB microscope hardware was attached during this run."
+  },
+  "root_cause_of_broken_annotated_image": {
+    "specimen_tested": "C100P61ThinF_IMG_20150918_144104_cell_162.png",
+    "input_dimensions": [
+      142,
+      148
+    ],
+    "input_image_corrupted": false,
+    "root_cause_summary": "1) Domain/Mode Mismatch: C100P61ThinF_IMG_20150918_144104_cell_162.png (142x148 px) is an already-segmented single-cell RBC patch on a black background, not a multi-cell full blood smear. Stage 1 YOLOv8n produced 1 tiny 6x5 px artifact box (< 16 px min_box_size), leaving 0 valid RBC crops. 2) Hardcoded 4K Header Banner Occlusion & Unconditional 1920-px Upscaling: In run_smartcell_pipeline.py (create_annotated_full_image), cv2.rectangle(img, (20, 20), (2450, 210), (20, 20, 20), -1) drew a 2430x190 px near-black banner directly onto the 142x148 image\u2014completely overwriting 85% of the cell from (20,20) to (142,148) with solid black (20,20,20), drawing giant clipped letters ('SMAR' / 'Valid R') across the remaining width, and unconditionally upscaling the occluded 142x148 image 13.5x to 1920x2001 px before embedding it in the PDF."
+  },
+  "server_url": "http://127.0.0.1:8521",
+  "all_checks_passed": true,
+  "checks": {
+    "1_full_smear_mode_analysis_and_pdf": {
+      "passed": true,
+      "image": "IMG_20150819_133447.jpg",
+      "input_mode": "full_smear",
+      "counts": {
+        "raw_yolo_detections": 195,
+        "valid_candidate_rbc_crops": 195,
+        "cnn_parasitized_rbc_count": 74,
+        "cnn_uninfected_rbc_count": 121,
+        "cnn_raw_crop_parasitized_count": 74,
+        "cnn_raw_crop_uninfected_count": 121,
+        "cnn_ellipse_masked_parasitized_count": 71,
+        "cnn_ellipse_masked_uninfected_count": 124,
+        "excluded_wbc_detections": 0,
+        "rejected_or_duplicate_boxes": 0
+      },
+      "estimated_parasitemia_percent": 37.9487,
+      "final_screening_statement": "The AI flagged 74 potentially parasitized red blood cells. Estimated parasitemia: 37.95%.",
+      "pdf_page_count": 2,
+      "source_vs_pdf_image_comparison": {
+        "passed": true,
+        "source_dimensions": {
+          "width": 5312,
+          "height": 2988
+        },
+        "embedded_dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "aspect_ratio_source": 1.7778,
+        "aspect_ratio_embedded": 1.7778,
+        "aspect_ratio_preserved": true,
+        "not_upscaled": true,
+        "matches_current_run_annotated_image": true,
+        "annotated_vs_embedded_mae": 0.0,
+        "source_vs_embedded_roi_mae": 4.189,
+        "source_vs_embedded_pearson_r": 0.98433,
+        "black_occluded_fraction_on_cell": 0.0001
+      }
+    },
+    "2_single_cell_mode_classification_and_pdf": {
+      "passed": true,
+      "image": "C100P61ThinF_IMG_20150918_144104_cell_162.png",
+      "input_mode": "single_cell",
+      "single_cell_result": {
+        "is_single_cell_mode": true,
+        "crop_id": "C100P61ThinF_IMG_20150918_144104_cell_162_cell_0001",
+        "predicted_class": "Parasitized",
+        "confidence": 0.999173,
+        "confidence_percent": 99.92,
+        "parasitized_prob": 0.999173,
+        "uninfected_prob": 0.000827,
+        "raw_predicted_class": "Parasitized",
+        "raw_confidence": 0.999173,
+        "raw_parasitized_prob": 0.999173,
+        "masked_predicted_class": "Parasitized",
+        "masked_confidence": 0.999018,
+        "masked_parasitized_prob": 0.999018,
+        "threshold_used": 0.5,
+        "cnn_variant": "finetuned_raw",
+        "crop_mode": "raw"
+      },
+      "parasitemia_applicable": false,
+      "final_screening_statement": "Single-Cell AI Classification Result: Predicted Parasitized (Confidence: 99.92%). Whole-smear parasitemia is not applicable for a single-cell input.",
+      "source_vs_pdf_image_comparison": {
+        "passed": true,
+        "source_dimensions": {
+          "width": 142,
+          "height": 148
+        },
+        "embedded_dimensions": {
+          "width": 142,
+          "height": 148
+        },
+        "aspect_ratio_source": 0.9595,
+        "aspect_ratio_embedded": 0.9595,
+        "aspect_ratio_preserved": true,
+        "not_upscaled": true,
+        "matches_current_run_annotated_image": true,
+        "annotated_vs_embedded_mae": 0.0,
+        "source_vs_embedded_roi_mae": 1.072,
+        "source_vs_embedded_pearson_r": 0.99957,
+        "black_occluded_fraction_on_cell": 0.0
+      },
+      "uninfected_single_cell_verified": true
+    },
+    "3_small_image_in_full_smear_mode_safe_handling": {
+      "passed": true,
+      "did_not_silently_switch_mode": true,
+      "valid_rbc_crops": 0,
+      "final_screening_statement": "No reliable result is available for this image.",
+      "zero_parasitemia_omitted_from_pdf": true,
+      "quality_warnings": [
+        "Insufficient Full-Smear Resolution / Mode Mismatch Warning: Image dimensions (142x148 px) are far below full-smear microscopy resolution (>= 640x480 px) and resemble a segmented single-cell patch. Stage 1 YOLOv8n full-smear detection is not designed for isolated single-cell crops; switch to Single-Cell Mode if this is a single RBC image."
+      ],
+      "source_vs_pdf_image_comparison": {
+        "passed": true,
+        "source_dimensions": {
+          "width": 142,
+          "height": 148
+        },
+        "embedded_dimensions": {
+          "width": 142,
+          "height": 148
+        },
+        "aspect_ratio_source": 0.9595,
+        "aspect_ratio_embedded": 0.9595,
+        "aspect_ratio_preserved": true,
+        "not_upscaled": true,
+        "matches_current_run_annotated_image": true,
+        "annotated_vs_embedded_mae": 0.0,
+        "source_vs_embedded_roi_mae": 1.048,
+        "source_vs_embedded_pearson_r": 0.99957,
+        "black_occluded_fraction_on_cell": 0.0
+      }
+    },
+    "4_low_resolution_warning_and_invalid_image_rejection": {
+      "passed": true,
+      "low_res_320x240_warnings": [
+        "Quality Warning (Potential Blur / Out-of-Focus): Frame has a low focus sharpness score (Laplacian variance=11.98 < 18.0). Adjust the microscope fine-focus knob and retake if needed.",
+        "Resolution Advisory: Image dimensions (320x240 px) are below recommended 640x480 full-smear microscopy resolution; small intracellular ring trophozoites and cell boundaries may not be reliably detected."
+      ],
+      "low_res_embedded_pdf_dimensions_not_upscaled": {
+        "width": 320,
+        "height": 240
+      },
+      "black_image_http_status": 400,
+      "black_image_error": "Black image rejected: Uploaded image is completely or nearly black (mean luminance=0.0/255, std=0.0). Please upload a valid blood-smear or single-cell specimen.",
+      "blank_image_http_status": 400,
+      "blank_image_error": "Blank/uniform image rejected: Uploaded image has virtually zero contrast (mean luminance=252.0/255, std=0.0) and contains no discernible cellular content.",
+      "corrupted_image_http_status": 400,
+      "empty_image_http_status": 400
+    },
+    "5_zero_valid_detections_safe_handling": {
+      "passed": true,
+      "valid_rbc_crops": 0,
+      "parasitemia_applicable": false,
+      "final_screening_statement": "No reliable result is available for this image.",
+      "zero_percent_omitted_from_pdf": true
+    },
+    "6_source_vs_pdf_embedded_image_comparison": {
+      "passed": true,
+      "full_smear_comparison": {
+        "passed": true,
+        "source_dimensions": {
+          "width": 5312,
+          "height": 2988
+        },
+        "embedded_dimensions": {
+          "width": 1920,
+          "height": 1080
+        },
+        "aspect_ratio_source": 1.7778,
+        "aspect_ratio_embedded": 1.7778,
+        "aspect_ratio_preserved": true,
+        "not_upscaled": true,
+        "matches_current_run_annotated_image": true,
+        "annotated_vs_embedded_mae": 0.0,
+        "source_vs_embedded_roi_mae": 4.189,
+        "source_vs_embedded_pearson_r": 0.98433,
+        "black_occluded_fraction_on_cell": 0.0001
+      },
+      "single_cell_mode_comparison": {
+        "passed": true,
+        "source_dimensions": {
+          "width": 142,
+          "height": 148
+        },
+        "embedded_dimensions": {
+          "width": 142,
+          "height": 148
+        },
+        "aspect_ratio_source": 0.9595,
+        "aspect_ratio_embedded": 0.9595,
+        "aspect_ratio_preserved": true,
+        "not_upscaled": true,
+        "matches_current_run_annotated_image": true,
+        "annotated_vs_embedded_mae": 0.0,
+        "source_vs_embedded_roi_mae": 1.072,
+        "source_vs_embedded_pearson_r": 0.99957,
+        "black_occluded_fraction_on_cell": 0.0
+      },
+      "single_cell_in_full_smear_comparison": {
+        "passed": true,
+        "source_dimensions": {
+          "width": 142,
+          "height": 148
+        },
+        "embedded_dimensions": {
+          "width": 142,
+          "height": 148
+        },
+        "aspect_ratio_source": 0.9595,
+        "aspect_ratio_embedded": 0.9595,
+        "aspect_ratio_preserved": true,
+        "not_upscaled": true,
+        "matches_current_run_annotated_image": true,
+        "annotated_vs_embedded_mae": 0.0,
+        "source_vs_embedded_roi_mae": 1.048,
+        "source_vs_embedded_pearson_r": 0.99957,
+        "black_occluded_fraction_on_cell": 0.0
+      }
+    },
+    "7_pdf_download_and_technical_exports": {
+      "passed": true,
+      "full_smear_exports_verified": true,
+      "single_cell_exports_verified": true
+    }
+  }
+}

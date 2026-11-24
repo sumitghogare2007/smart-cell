@@ -1,0 +1,23 @@
+# SmartCell Production Cloud Dependencies
+# Unified environment for Mode 1 (Malaria) and Mode 2 (ALL Leukemia)
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# PyTorch CPU (Stage 1 YOLOv8 Inference)
+torch>=2.1.0+cpu
+torchvision>=0.16.0+cpu
+
+# Ultralytics YOLOv8
+ultralytics>=8.1.0
+
+# TensorFlow CPU & Keras (Stage 2 Malaria CNN & ALL Leukemia EfficientNetB0)
+tensorflow-cpu>=2.15.0
+keras>=3.0.0
+
+# Scientific & Image Processing
+numpy>=1.24.0,<2.0.0
+Pillow>=10.0.0
+opencv-python-headless>=4.8.0
+scikit-learn>=1.3.0
+
+# Clinical PDF Report Generation
+reportlab>=4.0.0

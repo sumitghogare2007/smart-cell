@@ -1,0 +1,27 @@
+# ==============================================================================
+# SmartCell AI Backend — Render Blueprint Specification (Free Tier)
+# Cost: ₹0 / Month (College Research Prototype)
+# ==============================================================================
+
+services:
+  - type: web
+    name: smartcell-ai-backend
+    runtime: python
+    plan: free # Explicit Free Tier (512 MB RAM, 0.1 CPU, ₹0 cost)
+    region: oregon
+    buildCommand: pip install --no-cache-dir -r deployment/render_backend/requirements-render.txt
+    startCommand: python deployment/render_backend/render_app.py --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: 8501
+      - key: HOST
+        value: 0.0.0.0
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: TF_ENABLE_ONEDNN_OPTS
+        value: "0"
+      - key: TF_CPP_MIN_LOG_LEVEL
+        value: "2"
+      - key: PYTHONUNBUFFERED
+        value: "1"

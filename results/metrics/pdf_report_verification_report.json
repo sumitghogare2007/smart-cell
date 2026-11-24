@@ -1,0 +1,97 @@
+{
+  "timestamp": "2026-10-12T19:09:29",
+  "server_url": "http://127.0.0.1:8519",
+  "all_10_checks_passed": true,
+  "checks": {
+    "1_normal_pdf_generation": {
+      "passed": true,
+      "run_id": "run_20261012_190930_IMG_20150819_133447_finetuned_raw_raw_713cf6",
+      "pdf_filename": "SmartCell_Report_IMG_20150819_133447.pdf",
+      "pdf_byte_size": 400560,
+      "page_count": 10
+    },
+    "2_cell_counts_parasitemia_and_disclaimer_in_pdf": {
+      "passed": true,
+      "verified_valid_rbcs": 195,
+      "verified_parasitized_rbcs": 74,
+      "verified_uninfected_rbcs": 121,
+      "verified_parasitemia_str": "37.95%",
+      "verified_ground_truth_comparison_present": true,
+      "verified_mandatory_disclaimer_present": true
+    },
+    "3_annotated_image_embedded": {
+      "passed": true,
+      "embedded_image_dimensions": {
+        "width": 1920,
+        "height": 1080
+      },
+      "caption_present": true
+    },
+    "4_multipage_cell_tables": {
+      "passed": true,
+      "total_pages": 10,
+      "first_cell_present": true,
+      "last_cell_present": true,
+      "class_legend_present": true
+    },
+    "8_ui_pdf_json_csv_consistency": {
+      "passed": true,
+      "ui_counts_match_json": true,
+      "csv_rows_match_valid_rbcs": 195,
+      "parasitized_count_across_all_4": 74,
+      "uninfected_count_across_all_4": 121
+    },
+    "10_http_download_through_demo": {
+      "passed": true,
+      "download_url": "/api/file?run_id=run_20261012_190930_IMG_20150819_133447_finetuned_raw_raw_713cf6&file=SmartCell_Report_IMG_20150819_133447.pdf&download=1",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "content_disposition": "attachment; filename=\"SmartCell_Report_IMG_20150819_133447.pdf\"",
+      "downloaded_bytes": 400560,
+      "matches_disk_file_size": true
+    },
+    "9_selected_model_and_crop_mode_in_pdf": {
+      "passed": true,
+      "run_id": "run_20261012_191117_IMG_20150819_133447_original_masked_1bd2a8",
+      "verified_variant_in_pdf": "original",
+      "verified_checkpoint_in_pdf": "malaria_cnn_best.keras",
+      "verified_crop_mode_in_pdf": "masked",
+      "verified_parasitized_count_in_pdf": 81,
+      "verified_parasitemia_in_pdf": "41.54%",
+      "no_stale_run_data": true
+    },
+    "6_zero_detection_case_in_pdf": {
+      "passed": true,
+      "run_id": "run_20261012_191247_IMG_20150819_133447_finetuned_raw_raw_7228d4",
+      "pdf_byte_size": 264081,
+      "page_count": 2,
+      "zero_denominator_note_present": true
+    },
+    "5_missing_optional_metadata_handling": {
+      "passed": true,
+      "special_chars_escaped_safely": true,
+      "missing_fields_defaulted_to_na": true
+    },
+    "7_invalid_input_and_error_handling": {
+      "passed": true,
+      "corrupted_upload_http_status": 400,
+      "corrupted_upload_error_type": "InvalidImageError",
+      "empty_summary_raises_value_error": true,
+      "missing_run_dir_raises_file_not_found": true
+    },
+    "11_regression_pdf_button_visibility_and_live_download": {
+      "passed": true,
+      "verified_server_url": "http://127.0.0.1:8501",
+      "cache_control_header": "no-store, no-cache, must-revalidate, max-age=0",
+      "html_contains_downloadPdfBtn": true,
+      "run_id": "run_20261012_191345_IMG_20150819_133447_finetuned_raw_raw_7e709d",
+      "rendered_button_html": "<a class=\"btn-pdf-primary\" id=\"downloadPdfBtn\" href=\"/api/file?run_id=run_20261012_191345_IMG_20150819_133447_finetuned_raw_raw_7e709d&file=SmartCell_Report_IMG_20150819_133447.pdf&download=1\" download=\"SmartCell_Report_IMG_20150819_133447.pdf\">Download Complete Report (PDF) \u2014 SmartCell_Report_IMG_20150819_133447.pdf</a>",
+      "http_status": 200,
+      "content_type": "application/pdf",
+      "content_disposition": "attachment; filename=\"SmartCell_Report_IMG_20150819_133447.pdf\"",
+      "pdf_bytes": 400560,
+      "pdf_contains_current_run_id": true
+    }
+  },
+  "all_checks_passed": true
+}

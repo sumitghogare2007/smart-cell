@@ -1,0 +1,43 @@
+{
+  "model_name": "SmartCell ALL-IDB Leukemia Classifier",
+  "selected_architecture": "EfficientNetB0 Transfer Learning",
+  "source_checkpoint": "all_idb_efficientnetb0_best.keras",
+  "saved_path": "D:\\smartcell\\models\\all_idb_leukemia_best.keras",
+  "input_shape": [
+    224,
+    224,
+    3
+  ],
+  "classes": {
+    "0": "Normal Lymphocyte (Healthy)",
+    "1": "Lymphoblast (ALL Leukemia)"
+  },
+  "preprocessing": {
+    "target_size": [
+      224,
+      224
+    ],
+    "scaling": "Architecture-specific (normalized within model graph)"
+  },
+  "performance": {
+    "test_accuracy": 1.0,
+    "test_precision": 1.0,
+    "test_recall_sensitivity": 1.0,
+    "test_specificity": 1.0,
+    "test_f1": 1.0,
+    "test_roc_auc": 1.0,
+    "mean_inference_ms": 213.23,
+    "model_size_mb": 27.58
+  },
+  "generalization_summary": {
+    "final_train_accuracy": 0.9448,
+    "best_val_accuracy": 0.9744,
+    "final_val_accuracy": 0.9744,
+    "best_val_loss": 0.126,
+    "test_accuracy": 1.0,
+    "train_val_gap": 0.0296,
+    "val_test_gap": 0.0256,
+    "overfitting_risk": "Low"
+  },
+  "disclaimer": "Experimental prototype for research and educational purposes only. Not intended for clinical diagnostic decision-making without formal pathologist verification."
+}

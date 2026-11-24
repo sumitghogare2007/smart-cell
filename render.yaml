@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: smartcell-research-platform
+    env: docker
+    plan: starter # Starter tier (1-2 GB RAM) recommended for PyTorch + TensorFlow inference
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: PORT
+        value: 8501
+      - key: HOST
+        value: 0.0.0.0
+      - key: TF_ENABLE_ONEDNN_OPTS
+        value: 0
+      - key: TF_CPP_MIN_LOG_LEVEL
+        value: 2

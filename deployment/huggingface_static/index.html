@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width="device-width, initial-scale=1.0">
+  <title>SmartCell — AI Blood Cell Screening Platform (Hugging Face Static)</title>
+  <meta name="description" content="SmartCell AI-Assisted Blood Cell Screening Research Platform for Malaria and Acute Lymphoblastic Leukemia (ALL).">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+</head>
+<body>
+
+<!-- Research Prototype Disclaimer Banner -->
+<div class="disclaimer-banner">
+  <span class="disclaimer-pill">Research Prototype</span>
+  <span>Research Prototype — For academic and experimental use only. Not validated for clinical diagnosis or treatment decisions.</span>
+</div>
+
+<!-- Static Deployment Notification Bar -->
+<div class="static-deployment-banner">
+  <div>
+    <strong>Hugging Face Static Deployment:</strong>
+    <span>Client-side biomedical interface. Live deep learning inference connects to a dedicated SmartCell AI backend.</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:10px;">
+    <div id="backendStatusPill" class="backend-status-pill" title="Click to configure backend URL">
+      <span id="statusIndicatorDot" class="status-indicator-dot dot-unconfigured"></span>
+      <span id="statusIndicatorText">Backend: Not Configured</span>
+    </div>
+    <button type="button" class="btn-config-backend" id="openConfigModalBtn">Settings</button>
+  </div>
+</div>
+
+<!-- Main Application Header -->
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-icon-box">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="m4.93 4.93 4.24 4.24"></path>
+          <path d="m14.83 9.17 4.24-4.24"></path>
+          <path d="m14.83 14.83 4.24 4.24"></path>
+          <path d="m9.17 14.83-4.24 4.24"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </div>
+      <div class="brand-title-wrap">
+        <h1>
+          <span>SmartCell</span>
+          <span class="brand-tag">Research Platform</span>
+        </h1>
+        <p class="sub-primary">AI-Assisted Blood Cell Screening Research Platform</p>
+        <p class="sub-secondary">Intelligent microscopy research for malaria and leukemia cell analysis.</p>
+      </div>
+    </div>
+    <div>
+      <details class="diag-details">
+        <summary class="diag-summary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
+          System Diagnostics
+        </summary>
+        <div class="diag-body">
+          <div style="font-size:0.75rem; font-weight:700; color:var(--muted); text-transform:uppercase; margin-bottom:6px;">Environment &amp; Hardware</div>
+          <div class="hw-badges" id="hwBadges">
+            <span class="badge">Checking environment...</span>
+          </div>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
+
+<!-- Visual Workflow Progress Indicator -->
+<div class="workflow-stepper-wrap">
+  <div class="workflow-stepper">
+    <div class="step-item active">
+      <span class="step-num">1</span>
+      <span>Screening Mode</span>
+    </div>
+    <span class="step-sep">&rarr;</span>
+    <div class="step-item active">
+      <span class="step-num">2</span>
+      <span>Image Source</span>
+    </div>
+    <span class="step-sep">&rarr;</span>
+    <div class="step-item">
+      <span class="step-num">3</span>
+      <span>Preview &amp; Verify</span>
+    </div>
+    <span class="step-sep">&rarr;</span>
+    <div class="step-item">
+      <span class="step-num">4</span>
+      <span>AI Analysis</span>
+    </div>
+    <span class="step-sep">&rarr;</span>
+    <div class="step-item">
+      <span class="step-num">5</span>
+      <span>Results &amp; Report</span>
+    </div>
+  </div>
+</div>
+
+<!-- Disease Mode Selection Cards -->
+<div class="disease-selection-wrap">
+  <div class="disease-cards-grid">
+    <!-- Card 1: Malaria Screening -->
+    <div class="disease-tab active" id="diseaseTabMalaria" onclick="switchDiseaseScope('malaria')" role="button" tabindex="0">
+      <div class="disease-card-top">
+        <div class="disease-icon icon-malaria">🔬</div>
+        <div class="disease-info">
+          <h3>Malaria Screening</h3>
+          <p>Analyze blood-smear images to identify red blood cells and screen for malaria-associated patterns.</p>
+        </div>
+      </div>
+      <div class="disease-tags">
+        <span class="disease-tag">Blood Smear Analysis</span>
+        <span class="disease-tag">RBC Detection</span>
+        <span class="disease-tag">Cell Classification</span>
+      </div>
+    </div>
+
+    <!-- Card 2: ALL Leukemia Screening -->
+    <div class="disease-tab" id="diseaseTabLeukemia" onclick="switchDiseaseScope('leukemia')" role="button" tabindex="0">
+      <div class="disease-card-top">
+        <div class="disease-icon icon-leukemia">🩸</div>
+        <div class="disease-info">
+          <h3>ALL Leukemia Screening</h3>
+          <p>Analyze individual white blood cell images for Normal Lymphocyte vs Lymphoblast classification.</p>
+        </div>
+      </div>
+      <div class="disease-tags">
+        <span class="disease-tag">Single-Cell Analysis</span>
+        <span class="disease-tag">White Blood Cells</span>
+        <span class="disease-tag">AI Classification</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================================= -->
+<!-- MODE 1: MALARIA WORKFLOW                                                  -->
+<!-- ========================================================================= -->
+<main class="layout" id="malariaWorkflow">
+  <!-- Left Control Panel -->
+  <section>
+    <div class="card">
+      <div class="card-title">
+        <span>Image Source</span>
+        <span style="font-size:0.75rem; color:var(--accent);">Upload or Live Microscope</span>
+      </div>
+
+      <!-- Mode Switcher -->
+      <div class="mode-switcher" role="tablist" aria-label="Input Mode Selector">
+        <button type="button" class="mode-btn active" id="modeManualBtn" onclick="switchInputMode('manual')">
+          Upload Image
+        </button>
+        <button type="button" class="mode-btn" id="modeMicroscopeBtn" onclick="switchInputMode('microscope')">
+          Live Microscope
+        </button>
+      </div>
+
+      <!-- Mode A: Upload & Preset Workflow -->
+      <div id="manualUploadPanel">
+        <label for="specimenInputMode">Analysis Mode</label>
+        <select id="specimenInputMode" onchange="onSpecimenModeChange()">
+          <option value="full_smear" selected>Full-Smear Mode — Multi-Cell Blood Smear</option>
+          <option value="single_cell">Single-Cell Mode — Single RBC Patch</option>
+        </select>
+        <div class="hint" id="specimenModeHint">
+          Full-Smear Mode automatically detects erythrocytes, classifies each cell, and calculates estimated parasitemia.
+        </div>
+
+        <label for="imageUpload" id="imageUploadLabel">Upload Blood-Smear Image (.jpg, .png, .tif)</label>
+        <input type="file" id="imageUpload" accept=".jpg,.jpeg,.png,.bmp,.tif,.tiff">
+        <div class="hint" id="presetHintText">Or select a held-out benchmark specimen:</div>
+
+        <label for="presetSelect" id="presetSelectLabel">Benchmark Test Specimen</label>
+        <select id="presetSelect">
+          <option value="">-- Use Uploaded Image Above --</option>
+        </select>
+
+        <button class="btn-primary" id="runBtn" onclick="runAnalysis()">
+          Analyze Blood Smear
+        </button>
+      </div>
+
+      <!-- Mode B: Live Microscope Workflow -->
+      <div id="liveMicroscopePanel" style="display:none;">
+        <div class="cam-status-bar" id="microscopeStatusBar">
+          <div>
+            <span class="cam-dot" id="microscopeStatusDot"></span>
+            <strong id="microscopeStatusText">Camera Idle — Click Start Camera</strong>
+          </div>
+          <span id="microscopeResBadge" style="font-size:0.74rem; color:var(--muted);">No stream</span>
+        </div>
+
+        <label for="cameraDeviceSelect" style="margin-top:6px;">USB Microscope Device</label>
+        <div style="display:flex; gap:6px;">
+          <select id="cameraDeviceSelect" onchange="onCameraDeviceChange()" disabled>
+            <option value="">-- Start camera to list video devices --</option>
+          </select>
+          <button type="button" class="btn-secondary" id="refreshDevicesBtn" onclick="refreshCameraDevices()" title="Refresh camera list" style="width:auto; white-space:nowrap;">
+            Refresh
+          </button>
+        </div>
+        <div class="hint">Standard UVC USB digital microscopes connect automatically upon browser permission.</div>
+
+        <!-- Start / Stop Camera Controls -->
+        <div class="btn-row">
+          <button type="button" class="btn-secondary" id="startCameraBtn" onclick="startMicroscopeCamera()">
+            Start Camera
+          </button>
+          <button type="button" class="btn-danger-outline" id="stopCameraBtn" onclick="stopMicroscopeCamera()" disabled>
+            Stop Camera
+          </button>
+        </div>
+
+        <!-- Live Video Preview -->
+        <div class="video-stage" id="liveVideoStage">
+          <div class="video-placeholder" id="videoPlaceholderText">
+            Live USB Microscope preview is inactive.<br>
+            Click <strong>Start Camera</strong> to connect your digital microscope.
+          </div>
+          <video id="microscopeVideo" autoplay playsinline muted style="display:none;"></video>
+        </div>
+
+        <!-- Capture / Retake Controls -->
+        <div class="btn-row">
+          <button type="button" class="btn-secondary" id="captureImageBtn" onclick="captureMicroscopeFrame()" disabled>
+            Capture Image
+          </button>
+          <button type="button" class="btn-secondary" id="retakeImageBtn" onclick="retakeMicroscopeFrame()" disabled>
+            Retake
+          </button>
+        </div>
+
+        <!-- Captured Frame Inspection Preview -->
+        <div id="capturedPreviewSection" style="display:none; margin-top:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-size:0.80rem; font-weight:700; color:#bae6fd;">Captured Frame Preview</span>
+            <span id="capturedFrameInfo" style="font-size:0.74rem; color:var(--muted);"></span>
+          </div>
+          <div class="video-stage" style="margin-top:2px; margin-bottom:6px;">
+            <img id="capturedPreviewImg" alt="Captured Microscope Frame Preview">
+          </div>
+        </div>
+
+        <!-- Hidden Canvas -->
+        <canvas id="microscopeCaptureCanvas" style="display:none;"></canvas>
+
+        <!-- Quality Warnings -->
+        <div id="microscopeQualityBox"></div>
+
+        <!-- Capture & Analyze Button -->
+        <button type="button" class="btn-capture-analyze" id="captureAndAnalyzeBtn" onclick="captureAndAnalyzeMicroscope()" disabled>
+          Capture &amp; Analyze Image
+        </button>
+
+        <div style="text-align:center;">
+          <button type="button" class="btn-link-return" id="returnToManualBtn" onclick="returnToManualUpload()">
+            &larr; Return to Upload Workflow
+          </button>
+        </div>
+      </div>
+
+      <!-- Advanced Technical Settings (Collapsed) -->
+      <details class="clean-accordion">
+        <summary>Advanced Inference Parameters (Optional)</summary>
+        <div class="accordion-body">
+          <label for="cnnVariant">Classifier Checkpoint</label>
+          <select id="cnnVariant" onchange="onVariantChange()">
+            <option value="finetuned_raw" selected>Fine-Tuned Raw CNN (Recommended)</option>
+            <option value="finetuned_masked">Fine-Tuned Masked CNN</option>
+            <option value="original">Original Baseline CNN</option>
+          </select>
+          <div class="hint" id="variantDesc">Fine-tuned on native rectangular full-smear crops (Test Acc: 98.35%).</div>
+
+          <label for="cropMode">Crop Mode</label>
+          <select id="cropMode">
+            <option value="raw" selected>raw — Rectangular RGB Crop</option>
+            <option value="masked">masked — Elliptical Masked</option>
+          </select>
+
+          <label for="yoloDevice">Compute Device</label>
+          <select id="yoloDevice">
+            <option value="0" selected>Auto / Available GPU (CUDA:0)</option>
+            <option value="cpu">Force CPU</option>
+          </select>
+
+          <div class="grid-2">
+            <div>
+              <label for="yoloConf">Detection Conf</label>
+              <input type="number" id="yoloConf" value="0.25" min="0.05" max="0.95" step="0.05">
+            </div>
+            <div>
+              <label for="yoloIou">NMS IoU</label>
+              <input type="number" id="yoloIou" value="0.45" min="0.10" max="0.90" step="0.05">
+            </div>
+            <div>
+              <label for="dedupIou">Dedup IoU</label>
+              <input type="number" id="dedupIou" value="0.50" min="0.10" max="0.95" step="0.05">
+            </div>
+            <div>
+              <label for="cnnThresh">CNN Thresh</label>
+              <input type="number" id="cnnThresh" value="0.50" min="0.05" max="0.95" step="0.05">
+            </div>
+            <div>
+              <label for="padPx">Padding (px)</label>
+              <input type="number" id="padPx" value="4" min="0" max="16" step="1">
+            </div>
+            <div>
+              <label for="minBoxSize">Min Box (px)</label>
+              <input type="number" id="minBoxSize" value="16" min="8" max="64" step="2">
+            </div>
+          </div>
+
+          <div class="checkbox-row">
+            <input type="checkbox" id="testZeroDet">
+            <span>Simulate Zero Detections</span>
+          </div>
+          <div class="checkbox-row">
+            <input type="checkbox" id="injectInvalidBoxes">
+            <span>Simulate Edge-Case WBC / Invalid Boxes</span>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Right Output Dashboard -->
+  <section>
+    <div id="errorContainer"></div>
+
+    <div id="welcomeBanner" class="alert-info">
+      <strong>Ready for Screening:</strong> Upload a microscope blood-smear image, select a benchmark test image, or use the <strong>Live Microscope</strong> tab to capture and analyze a blood field.
+    </div>
+
+    <div id="resultsContainer" style="display:none;">
+      <!-- Final Screening Result Banner -->
+      <div id="finalScreeningCard" class="final-screening-card"></div>
+
+      <!-- Pre-Inference Quality Warnings -->
+      <div id="resultQualityWarnings"></div>
+
+      <!-- Summary KPI Grid -->
+      <div class="kpi-grid">
+        <div class="kpi-box kpi-total">
+          <div class="kpi-label">Total Cells Detected</div>
+          <div class="kpi-val" id="kpiTotalCells">0</div>
+          <div class="kpi-sub">Candidate Red Blood Cells</div>
+        </div>
+        <div class="kpi-box kpi-par">
+          <div class="kpi-label">Parasitized Cells</div>
+          <div class="kpi-val" id="kpiPar">0</div>
+          <div class="kpi-sub" id="kpiParSub">AI Flagged Candidates</div>
+        </div>
+        <div class="kpi-box kpi-uninf">
+          <div class="kpi-label">Uninfected Cells</div>
+          <div class="kpi-val" id="kpiUninf">0</div>
+          <div class="kpi-sub" id="kpiUninfSub">Valid RBC Candidates</div>
+        </div>
+        <div class="kpi-box kpi-rate">
+          <div class="kpi-label">Estimated Parasitemia</div>
+          <div class="kpi-val" id="kpiRate">0.00%</div>
+          <div class="kpi-sub" id="kpiRateFrac">0 / 0 RBCs</div>
+        </div>
+      </div>
+
+      <!-- Secondary Metrics Row -->
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:10px; margin-bottom:18px;">
+        <div class="kpi-box kpi-wbc" style="padding:10px 14px;">
+          <div class="kpi-label" style="font-size:0.70rem;">Excluded WBCs</div>
+          <div class="kpi-val" id="kpiWbc" style="font-size:1.25rem; margin-top:2px;">0</div>
+        </div>
+        <div class="kpi-box kpi-rej" style="padding:10px 14px;">
+          <div class="kpi-label" style="font-size:0.70rem;">Suppressed / Duplicates</div>
+          <div class="kpi-val" id="kpiRej" style="font-size:1.25rem; margin-top:2px;">0</div>
+        </div>
+        <div class="kpi-box" style="padding:10px 14px;">
+          <div class="kpi-label" style="font-size:0.70rem;">Processing Time</div>
+          <div class="kpi-val" id="kpiTime" style="font-size:1.25rem; margin-top:2px;">0.0s</div>
+          <div class="kpi-sub" id="kpiTimeSub" style="font-size:0.70rem;">Pipeline Latency</div>
+        </div>
+      </div>
+
+      <!-- Report Downloads & Export Section -->
+      <div class="card">
+        <div class="card-title">
+          <span>Official Reports &amp; Data Artifacts</span>
+          <span id="runIdBadge" style="font-size:0.76rem; color:var(--muted);"></span>
+        </div>
+        <div id="exportButtons"></div>
+
+        <!-- Optional Collapsed Telemetry Summary -->
+        <details class="clean-accordion" style="margin-top:14px;">
+          <summary>Technical Execution Details &amp; Confidence Telemetry</summary>
+          <div class="accordion-body">
+            <div id="execSummaryGrid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px; font-size:0.83rem;"></div>
+          </div>
+        </details>
+      </div>
+
+      <!-- Visual Inspection & Detailed Tables Card -->
+      <div class="card">
+        <div class="tabs">
+          <button class="tab-btn active" onclick="switchTab('tabAnnotated', this)">Annotated Smear</button>
+          <button class="tab-btn" onclick="switchTab('tabOriginal', this)">Original Image</button>
+          <button class="tab-btn" onclick="switchTab('tabContact', this)">RBC Contact Sheet</button>
+          <button class="tab-btn" onclick="switchTab('tabCells', this)">Per-Cell Predictions (<span id="tabCellCount">0</span>)</button>
+          <button class="tab-btn" onclick="switchTab('tabExcluded', this)">Excluded &amp; Rejected (<span id="tabExclCount">0</span>)</button>
+          <button class="tab-btn" onclick="switchTab('tabTxtReport', this)">Text Summary</button>
+        </div>
+
+        <div id="tabAnnotated" class="tab-pane active">
+          <img id="annotatedImg" class="img-viewer" alt="Annotated Blood Smear">
+        </div>
+
+        <div id="tabOriginal" class="tab-pane">
+          <img id="originalInputImg" class="img-viewer" alt="Original Input Image">
+        </div>
+
+        <div id="tabContact" class="tab-pane">
+          <img id="contactImg" class="img-viewer" alt="RBC Crops Contact Sheet">
+        </div>
+
+        <div id="tabCells" class="tab-pane">
+          <div style="display:flex; gap:12px; margin-bottom:12px; align-items:center;">
+            <label style="margin:0; font-weight:600;">Filter Classification:</label>
+            <select id="cellFilter" onchange="renderCellTable()" style="width:220px;">
+              <option value="ALL">All Valid Cells</option>
+              <option value="Parasitized">Parasitized Cells Only</option>
+              <option value="Uninfected">Uninfected Cells Only</option>
+            </select>
+          </div>
+          <div style="max-height:520px; overflow-y:auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Crop</th>
+                  <th>Cell ID</th>
+                  <th>Bounding Box</th>
+                  <th>Detection Conf</th>
+                  <th>Classification</th>
+                  <th>Confidence</th>
+                  <th>Raw Crop P(Par)</th>
+                  <th>Masked Crop P(Par)</th>
+                </tr>
+              </thead>
+              <tbody id="cellTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="tabExcluded" class="tab-pane">
+          <h4 style="margin-bottom:8px; color:#fbbf24; font-size:0.90rem;">Excluded WBC Detections</h4>
+          <div id="wbcListContainer" style="margin-bottom:18px;"></div>
+          <h4 style="margin-bottom:8px; color:#c084fc; font-size:0.90rem;">Rejected / Duplicate Detections</h4>
+          <div id="rejectedListContainer"></div>
+        </div>
+
+        <div id="tabTxtReport" class="tab-pane">
+          <pre class="report-box" id="txtReportBox"></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ========================================================================= -->
+<!-- MODE 2: ALL LEUKEMIA WORKFLOW                                             -->
+<!-- ========================================================================= -->
+<main class="layout" id="leukemiaWorkflow" style="display:none;">
+  <!-- Left Column: Controls & Input -->
+  <section>
+    <div class="card">
+      <div class="card-title">
+        <span>White Blood Cell Specimen Source</span>
+        <span style="font-size:0.75rem; color:#fb7185;">Single-Cell Analysis</span>
+      </div>
+
+      <!-- 3-way Mode Switcher -->
+      <div class="mode-switcher mode-switcher-3" role="tablist" aria-label="ALL Input Option Selector">
+        <button type="button" class="mode-btn active" id="leukemiaInputMicroscopeBtn" onclick="switchLeukemiaInputMode('microscope')">
+          Live Microscope
+        </button>
+        <button type="button" class="mode-btn" id="leukemiaInputUploadBtn" onclick="switchLeukemiaInputMode('upload')">
+          Upload Image
+        </button>
+        <button type="button" class="mode-btn" id="leukemiaInputSamplesBtn" onclick="switchLeukemiaInputMode('samples')">
+          Dataset Samples
+        </button>
+      </div>
+
+      <!-- OPTION 1: Live Microscope Panel -->
+      <div id="leukemiaLiveMicroscopePanel">
+        <div class="cam-status-bar" id="leukemiaMicroscopeStatusBar">
+          <div>
+            <span class="cam-dot" id="leukemiaMicroscopeStatusDot"></span>
+            <strong id="leukemiaMicroscopeStatusText">Camera Idle — Click Start Camera</strong>
+          </div>
+          <span id="leukemiaMicroscopeResBadge" style="font-size:0.74rem; color:var(--muted);">No stream</span>
+        </div>
+
+        <label for="leukemiaCameraDeviceSelect" style="margin-top:6px;">USB Microscope Device</label>
+        <div style="display:flex; gap:6px;">
+          <select id="leukemiaCameraDeviceSelect" onchange="onLeukemiaCameraDeviceChange()" disabled style="flex:1;">
+            <option value="">-- Start camera to list video devices --</option>
+          </select>
+          <button type="button" class="btn-secondary" id="leukemiaRefreshDevicesBtn" onclick="refreshLeukemiaCameraDevices()" title="Refresh video input list">
+            Refresh
+          </button>
+        </div>
+        <div class="hint">Standard UVC USB digital microscopes connect automatically upon browser permission.</div>
+
+        <!-- Start / Stop Camera Controls -->
+        <div class="btn-row" style="margin-top:8px;">
+          <button type="button" class="btn-secondary" id="leukemiaStartCameraBtn" onclick="startLeukemiaCamera()">
+            Start Camera
+          </button>
+          <button type="button" class="btn-danger-outline" id="leukemiaStopCameraBtn" onclick="stopLeukemiaCamera()" disabled>
+            Stop Camera
+          </button>
+        </div>
+
+        <!-- Live Video Preview Stage -->
+        <div class="video-stage" id="leukemiaLiveVideoStage" style="margin-top:10px;">
+          <div class="video-placeholder" id="leukemiaVideoPlaceholderText">
+            Live USB Microscope preview is inactive.<br>
+            Click <strong>Start Camera</strong> to connect your digital microscope.
+          </div>
+          <video id="leukemiaMicroscopeVideo" autoplay playsinline muted style="display:none;"></video>
+        </div>
+
+        <!-- Capture / Retake / Discard Controls -->
+        <div class="btn-row" style="margin-top:10px; display:flex; gap:6px;">
+          <button type="button" class="btn-secondary" id="leukemiaCaptureImageBtn" onclick="captureLeukemiaFrame()" disabled style="background:#2563eb; color:#fff; border-color:#3b82f6; flex:1.2; font-weight:600;">
+            📸 Capture Image
+          </button>
+          <button type="button" class="btn-secondary" id="leukemiaRetakeImageBtn" onclick="retakeLeukemiaFrame()" disabled style="flex:1;">
+            🔄 Retake
+          </button>
+          <button type="button" class="btn-danger-outline" id="leukemiaDiscardImageBtn" onclick="discardLeukemiaFrame()" disabled style="flex:1;">
+            🗑️ Discard
+          </button>
+        </div>
+
+        <!-- Captured Frame Inspection Preview -->
+        <div id="leukemiaCapturedPreviewSection" style="display:none; margin-top:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-size:0.80rem; font-weight:700; color:#fca5a5;">Captured Frame Preview</span>
+            <span id="leukemiaCapturedFrameInfo" style="font-size:0.74rem; color:var(--muted);"></span>
+          </div>
+          <div class="video-stage" style="margin-top:2px; margin-bottom:6px;">
+            <img id="leukemiaCapturedPreviewImg" alt="Captured ALL Microscope Frame Preview" style="max-height:280px; width:auto; margin:0 auto; display:block;">
+          </div>
+        </div>
+
+        <!-- Client-Side Quality Warnings Box -->
+        <div id="leukemiaQualityBox"></div>
+
+        <!-- Direct Analyze Captured Button -->
+        <button type="button" class="btn-primary-leukemia" id="leukemiaCaptureAndAnalyzeBtn" onclick="captureAndAnalyzeLeukemiaMicroscope()" disabled>
+          🔬 Analyze Captured Cell
+        </button>
+      </div>
+
+      <!-- OPTION 2: Upload Image Panel -->
+      <div id="leukemiaUploadPanel" style="display:none;">
+        <label for="leukemiaImageUpload">Upload White Blood Cell Image (.png, .jpg, .tif, .bmp)</label>
+        <input type="file" id="leukemiaImageUpload" accept=".png,.jpg,.jpeg,.bmp,.tif,.tiff" onchange="onLeukemiaFileChange()">
+        <div class="hint" id="leukemiaSelectedName" style="color:var(--accent); font-weight:600; margin-top:4px;">No file selected.</div>
+
+        <div id="leukemiaUploadPreviewSection" style="display:none; margin-top:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-size:0.80rem; font-weight:700; color:#93c5fd;">Upload Preview &amp; Details</span>
+            <span id="leukemiaUploadDetailsBadge" style="font-size:0.74rem; color:var(--muted);"></span>
+          </div>
+          <div class="video-stage" style="margin-top:2px; max-height:240px;">
+            <img id="leukemiaUploadPreviewImg" alt="Uploaded Cell Preview" style="max-height:220px; width:auto; margin:0 auto; display:block;">
+          </div>
+          <div id="leukemiaUploadMetaBox" style="font-size:0.78rem; color:#cbd5e1; margin-top:6px; background:var(--panel-alt); padding:8px 12px; border-radius:6px; border:1px solid var(--border);"></div>
+        </div>
+
+        <button type="button" class="btn-primary-leukemia" id="btnRunLeukemiaUpload" onclick="runLeukemiaAnalysis('upload')">
+          Classify White Blood Cell
+        </button>
+      </div>
+
+      <!-- OPTION 3: Dataset Samples Panel -->
+      <div id="leukemiaSamplesPanel" style="display:none;">
+        <label>Benchmark Test Cell Presets (ALL-IDB2)</label>
+        <div style="font-size:0.78rem; font-weight:700; color:#86efac; margin:8px 0 4px;">Normal Lymphocytes:</div>
+        <div class="preset-btn-grid">
+          <button type="button" class="btn-export leukemia-preset-btn" onclick="selectLeukemiaPreset(this, 'Im133_0.png')">Im133_0</button>
+          <button type="button" class="btn-export leukemia-preset-btn" onclick="selectLeukemiaPreset(this, 'Im145_0.png')">Im145_0</button>
+          <button type="button" class="btn-export leukemia-preset-btn" onclick="selectLeukemiaPreset(this, 'Im223_0.png')">Im223_0</button>
+          <button type="button" class="btn-export leukemia-preset-btn" onclick="selectLeukemiaPreset(this, 'Im260_0.png')">Im260_0</button>
+          <button type="button" class="btn-export leukemia-preset-btn" onclick="selectLeukemiaPreset(this, 'Im151_0.png')">Im151_0</button>
+          <button type="button" class="btn-export leukemia-preset-btn" onclick="selectLeukemiaPreset(this, 'Im152_0.png')">Im152_0</button>
+        </div>
+
+        <div style="font-size:0.78rem; font-weight:700; color:#fca5a5; margin:8px 0 4px;">Lymphoblasts (ALL Leukemia):</div>
+        <div class="preset-btn-grid">
+          <button type="button" class="btn-export leukemia-preset-btn" onclick="selectLeukemiaPreset(this, 'Im001_1.png')">Im001_1</button>
+          <button type="button" class="btn-export leukemia-preset-btn" onclick="selectLeukemiaPreset(this, 'Im003_1.png')">Im003_1</button>
+          <button type="button" class="btn-export leukemia-preset-btn" onclick="selectLeukemiaPreset(this, 'Im005_1.png')">Im005_1</button>
+          <button type="button" class="btn-export leukemia-preset-btn" onclick="selectLeukemiaPreset(this, 'Im065_1.png')">Im065_1</button>
+          <button type="button" class="btn-export leukemia-preset-btn" onclick="selectLeukemiaPreset(this, 'Im090_1.png')">Im090_1</button>
+          <button type="button" class="btn-export leukemia-preset-btn" onclick="selectLeukemiaPreset(this, 'Im128_1.png')">Im128_1</button>
+        </div>
+
+        <div class="hint" id="leukemiaPresetSelectedHint" style="color:#86efac; font-weight:600; margin-bottom:10px;">Selected: None</div>
+
+        <div id="leukemiaSamplePreviewSection" style="display:none; margin-top:8px; margin-bottom:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <span style="font-size:0.80rem; font-weight:700; color:#bae6fd;">Selected Benchmark Cell</span>
+            <span id="leukemiaSampleDetailsBadge" style="font-size:0.74rem; color:var(--muted);"></span>
+          </div>
+          <div class="video-stage" style="margin-top:2px; max-height:220px;">
+            <img id="leukemiaSamplePreviewImg" alt="Selected Benchmark Cell Preview" style="max-height:200px; width:auto; margin:0 auto; display:block;">
+          </div>
+        </div>
+
+        <button type="button" class="btn-primary-leukemia" id="btnRunLeukemiaSample" onclick="runLeukemiaAnalysis('sample')" style="margin-top:4px;">
+          Classify Benchmark Cell
+        </button>
+      </div>
+
+      <!-- Specimen Case Reference -->
+      <div style="margin-top:14px; border-top:1px solid var(--border); padding-top:12px;">
+        <label for="leukemiaSampleId">Case / Patient Reference (Optional)</label>
+        <input type="text" id="leukemiaSampleId" placeholder="e.g. CASE-2026-001" style="background:var(--panel-alt);">
+      </div>
+
+      <div id="leukemiaErrorAlert" style="display:none; margin-top:14px; padding:12px; background:rgba(239,68,68,0.15); border:1px solid #ef4444; border-radius:6px; color:#fca5a5; font-size:0.85rem;"></div>
+
+      <!-- Model Specifications (Collapsed) -->
+      <details class="clean-accordion">
+        <summary>Model Architecture &amp; Benchmark Specifications</summary>
+        <div class="accordion-body" style="font-size:0.81rem; line-height:1.7;">
+          <div><strong>Architecture:</strong> EfficientNetB0 Transfer Learning</div>
+          <div><strong>Pre-training:</strong> ImageNet &rarr; ALL-IDB2 Fine-Tuned</div>
+          <div><strong>Input Resolution:</strong> 224 × 224 × 3 RGB</div>
+          <div><strong>Test Accuracy:</strong> <span style="color:#86efac; font-weight:bold;">100.0% (39/39 correct)</span></div>
+          <div><strong>Test ROC-AUC:</strong> <span style="color:#86efac; font-weight:bold;">1.0000</span></div>
+          <div><strong>Decision Boundary:</strong> 0.50 (Standard sigmoid threshold)</div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Right Column: Results & Diagnosis -->
+  <section>
+    <div class="card" id="leukemiaEmptyState" style="text-align:center; padding:54px 24px; color:var(--muted);">
+      <div style="font-size:3.2rem; margin-bottom:14px;">🩸</div>
+      <h3 style="color:#fff; margin-bottom:8px; font-size:1.2rem;">ALL Leukemia Screening Ready</h3>
+      <p style="font-size:0.9rem; max-width:540px; margin:0 auto 20px; line-height:1.5;">Connect a USB microscope, upload a white blood cell image, or select a dataset sample from the left panel to begin classification.</p>
+    </div>
+
+    <div id="leukemiaResultsCard" style="display:none;">
+      <!-- Diagnosis Banner -->
+      <div id="leukemiaDiagnosisBanner" class="diagnosis-banner banner-normal"></div>
+
+      <!-- Main Visual & Probability Card -->
+      <div class="card">
+        <div class="card-title">
+          <span>Morphology &amp; Classification Confidence</span>
+        </div>
+        <div style="display:grid; grid-template-columns: 240px 1fr; gap:22px; align-items:start;">
+          <div>
+            <img id="leukemiaPreviewImg" src="" alt="Analyzed Cell" style="width:100%; border-radius:8px; border:1px solid var(--border); box-shadow:0 4px 14px rgba(0,0,0,0.45);">
+            <div style="font-size:0.75rem; color:var(--muted); text-align:center; margin-top:6px;">Input Cell (224×224 px)</div>
+          </div>
+          <div>
+            <!-- Probability Bar 1: Normal -->
+            <div class="prob-bar-row">
+              <div class="prob-bar-label">
+                <span style="color:#86efac;">Normal Lymphocyte</span>
+                <span id="pNormVal" style="color:#86efac; font-weight:bold;">0%</span>
+              </div>
+              <div class="prob-track">
+                <div id="pNormBar" class="prob-fill prob-fill-normal" style="width:0%;"></div>
+              </div>
+            </div>
+
+            <!-- Probability Bar 2: Blast -->
+            <div class="prob-bar-row">
+              <div class="prob-bar-label">
+                <span style="color:#fca5a5;">Lymphoblast (ALL-associated cell category)</span>
+                <span id="pBlastVal" style="color:#fca5a5; font-weight:bold;">0%</span>
+              </div>
+              <div class="prob-track">
+                <div id="pBlastBar" class="prob-fill prob-fill-blast" style="width:0%;"></div>
+              </div>
+            </div>
+
+            <div style="margin-top:16px; padding:12px 14px; background:var(--panel-alt); border-radius:8px; border:1px solid var(--border);">
+              <div style="font-size:0.80rem; font-weight:700; color:var(--accent); margin-bottom:4px;">Morphological Assessment:</div>
+              <p id="leukemiaMorphSummary" style="font-size:0.84rem; color:var(--text); line-height:1.45;"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Downloads Card -->
+      <div class="card">
+        <div class="card-title">
+          <span>Official Reports &amp; Artifact Exports</span>
+        </div>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a id="dlLeukemiaPdf" href="#" class="btn-export" style="background:#be123c; border-color:#e11d48; color:#fff; font-weight:700;" target="_blank">
+            📄 Download Leukemia PDF Report
+          </a>
+          <a id="dlLeukemiaJson" href="#" class="btn-export" target="_blank">
+            💾 Download JSON Result
+          </a>
+          <a id="dlLeukemiaTxt" href="#" class="btn-export" target="_blank">
+            📝 Download TXT Summary
+          </a>
+        </div>
+      </div>
+
+      <!-- Regulatory Disclaimer Card -->
+      <div class="card" style="border-color:#be123c; background:rgba(190,18,60,0.06); padding:14px 18px;">
+        <div style="color:#fca5a5; font-size:0.80rem; font-weight:700; margin-bottom:4px;">RESEARCH &amp; EDUCATIONAL PROTOTYPE ONLY</div>
+        <p style="font-size:0.77rem; color:#fecdd3; line-height:1.4;">
+          This acute lymphoblastic leukemia screening tool is an experimental research prototype for scientific evaluation. It is NOT a clinically certified diagnostic device. Definitive medical diagnosis requires certified pathologist hematomorphology, bone marrow biopsy, and flow cytometry.
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Backend Connection Configuration Modal -->
+<div class="modal-overlay" id="backendConfigModal">
+  <div class="modal-card">
+    <div class="modal-header">
+      <h3>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+        SmartCell AI Backend Connection Settings
+      </h3>
+      <button type="button" class="modal-close-btn" id="closeConfigModalBtn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p style="margin:0; font-size:0.88rem; color:var(--muted); line-height:1.5;">
+        Because Hugging Face Static Spaces host client-side assets only, live AI model inference (YOLOv8n object detection, CNN parasitemia quantification, and EfficientNetB0 leukemia classification) is performed by connecting to a SmartCell API service.
+      </p>
+      <div class="modal-input-group">
+        <label for="backendUrlInput">Backend API Base URL</label>
+        <input type="url" id="backendUrlInput" class="modal-input" placeholder="e.g. http://127.0.0.1:8501 or https://my-backend.hf.space" autocomplete="off" spellcheck="false">
+        <span style="font-size:0.75rem; color:var(--muted);">Leave blank for offline / unconfigured preview mode.</span>
+      </div>
+      <div id="modalTestStatus" class="modal-test-status"></div>
+      <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px; font-size:0.8rem; color:var(--muted);">
+        <strong style="color:var(--text-bright); display:block; margin-bottom:4px;">Local Execution Quick-Start:</strong>
+        To run the AI backend on your local GPU/CPU machine, execute <code>launch_smartcell_demo.bat</code> in the repository root, which starts the server at <code>http://127.0.0.1:8501</code>.
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" id="testBackendBtn">Test Connection</button>
+      <button type="button" class="btn btn-primary" id="saveBackendBtn">Save & Connect</button>
+    </div>
+  </div>
+</div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

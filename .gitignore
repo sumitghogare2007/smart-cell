@@ -1,0 +1,58 @@
+# Python Virtual Environments
+venv/
+venv_yolo/
+venv_yolo_gpu/
+.venv/
+env/
+.env
+
+# Heavy Training Datasets (Strictly excluded from git tracking)
+ALL_IDB1/
+ALL_IDB2/
+cell_images/
+dataset/
+dataset_all/train/
+dataset_all/val/
+Polygon Set/
+Point Set/
+Testing_images/*
+!Testing_images/cell_images/
+yolo_malaria/images/train/
+yolo_malaria/images/val/
+yolo_malaria/labels/train/
+yolo_malaria/labels/val/
+*.cache
+
+# Intermediate Training Crops & Run Outputs
+*.bak
+results/*
+!results/yolo_malaria_run/
+results/yolo_malaria_run/*
+!results/yolo_malaria_run/weights/
+results/yolo_malaria_run/weights/*
+!results/yolo_malaria_run/weights/best.pt
+!results/metrics/
+results/metrics/*
+!results/metrics/*.json
+!results/all_idb/
+results/all_idb/*
+!results/all_idb/*.json
+runs/
+*.log
+*.tmp
+*.mp4
+*.avi
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+yolov8n.pt
+import os.py
+
+# IDEs & System Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

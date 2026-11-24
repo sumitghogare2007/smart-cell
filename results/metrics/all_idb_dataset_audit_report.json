@@ -1,0 +1,119 @@
+{
+  "audit_timestamp": "2026-11-21T22:30:00+05:30",
+  "datasets_audited": [
+    "ALL_IDB1",
+    "ALL_IDB2"
+  ],
+  "all_idb1": {
+    "total_images": 108,
+    "image_format": {
+      ".jpg": 108
+    },
+    "resolutions": {
+      "1712x1368": 33,
+      "2592x1944": 74,
+      "1226x652": 1
+    },
+    "color_channels": {
+      "3": 108
+    },
+    "corrupted_files_count": 0,
+    "corrupted_files": [],
+    "class_distribution": {
+      "0": {
+        "count": 59,
+        "percentage": 54.63,
+        "clinical_meaning": "Healthy individual / No blast cells present"
+      },
+      "1": {
+        "count": 49,
+        "percentage": 45.37,
+        "clinical_meaning": "ALL patient / At least one blast cell present"
+      }
+    },
+    "annotation_details": {
+      "annotation_type": "Centroid point coordinates (.xyc text files)",
+      "total_xyc_files": 108,
+      "total_blast_centroids_annotated": 510,
+      "images_with_blasts": 49,
+      "images_without_blasts": 59
+    },
+    "internal_duplicates": [
+      {
+        "sha256": "2762f95377d95c12837babe876aa62adfdced644a39129beb3e1e1f4b202090c",
+        "files": [
+          "Im093_0.jpg",
+          "Im108_0.jpg"
+        ]
+      }
+    ],
+    "dataset_nature": "Whole-slide microscopic field classification and blast centroid localization"
+  },
+  "all_idb2": {
+    "total_images": 260,
+    "image_format": {
+      ".tif": 260
+    },
+    "resolutions": {
+      "257x257": 250,
+      "257x253": 2,
+      "257x256": 1,
+      "257x235": 1,
+      "257x232": 1,
+      "257x220": 1,
+      "193x257": 1,
+      "196x257": 1,
+      "257x214": 1,
+      "232x257": 1
+    },
+    "color_channels": {
+      "3": 260
+    },
+    "corrupted_files_count": 0,
+    "corrupted_files": [],
+    "class_distribution": {
+      "0": {
+        "count": 130,
+        "percentage": 50.0,
+        "clinical_meaning": "Normal lymphocyte / Non-blast cell from healthy individual"
+      },
+      "1": {
+        "count": 130,
+        "percentage": 50.0,
+        "clinical_meaning": "Lymphoblast / ALL leukemia blast cell from ALL patient"
+      }
+    },
+    "internal_duplicates": [
+      {
+        "sha256": "fbe38fc851c0a5a26b41b3768ea9dee573f3670c4e649494a41b0d51e91d26bf",
+        "files": [
+          "Im223_0.tif",
+          "Im257_0.tif"
+        ]
+      }
+    ],
+    "dataset_nature": "Cropped single-cell classification benchmark (centered single cell)"
+  },
+  "cross_dataset_relationship": {
+    "exact_sha256_duplicates": 0,
+    "crop_origin_analysis": "ALL_IDB2 consists of single-cell bounding crops extracted directly from the whole-microscopic frames of ALL_IDB1.",
+    "leakage_warning": "CRITICAL: ALL_IDB1 and ALL_IDB2 share underlying patients and image scenes. ALL_IDB2 cells are sub-crops of ALL_IDB1 images. Mixing them into train/test without tracking provenance will cause data leakage. They must be evaluated and trained on separate, controlled pipelines.",
+    "recommended_primary_classification_dataset": "ALL_IDB2 is specifically designed, standardized, and benchmarked for single-cell CNN classification (130 normal vs 130 blast, centered 257x257 cells), directly matching SmartCell's cell-level classification architecture."
+  },
+  "patient_id_analysis": {
+    "patient_ids_available": false,
+    "filename_format": "ImXXX_Y where XXX is sequential counter and Y is class label",
+    "metadata_status": "No patient IDs or patient-level grouping tables are present in the dataset directories or official text files. The original publication (Scotti et al.) anonymized patient IDs.",
+    "split_implication": "Since explicit patient IDs are unavailable, a class-stratified split with fixed random seed (42) and deduplication must be used, with this limitation explicitly documented."
+  },
+  "classification_vs_segmentation": {
+    "all_idb1": "Binary slide classification + point centroid localization. (No segmentation masks or polygon contours)",
+    "all_idb2": "Binary single-cell classification. (No segmentation masks or polygon contours)"
+  },
+  "ground_truth_verification": {
+    "method": "Directly extracted from authoritative dataset readme files and official file naming convention verified against centroid annotations",
+    "class_0_label": "0 (Negative / Healthy / Non-blast)",
+    "class_1_label": "1 (Positive / ALL / Blast cell)",
+    "no_guessing": true
+  }
+}

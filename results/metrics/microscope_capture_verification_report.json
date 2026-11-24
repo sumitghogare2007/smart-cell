@@ -1,0 +1,269 @@
+{
+  "verification_suite": "SmartCell USB Microscope Live Preview, Capture and Analyze Verification",
+  "timestamp": "2026-10-12T23:26:44",
+  "base_url": "http://127.0.0.1:8501",
+  "overall_status": "PASS",
+  "passed_checks": 13,
+  "total_checks": 13,
+  "hardware_camera_probe": {
+    "directshow_index_0_opened": true,
+    "frame_captured": true,
+    "resolution": "640x480",
+    "usb_microscope_physically_connected": false,
+    "detected_camera_devices": [
+      {
+        "FriendlyName": "HP Wide Vision HD Camera",
+        "InstanceId": "USB\\VID_30C9&PID_0069&MI_00\\6&2000B69F&0&0000"
+      },
+      {
+        "FriendlyName": "HP LaserJet Pro MFP 4104 [D3C021]",
+        "InstanceId": "SWD\\ESCL\\6FD38642-AEF4-491A-A88D-41571108DFF8"
+      }
+    ],
+    "testing_mode_summary": "Integrated Windows UVC camera (HP Wide Vision HD Camera, 640x480 via DirectShow) probed directly; external USB digital microscope was not physically plugged in during automated verification, so microscope camera states, multi-camera selection, track release, and blood-smear frame capture -> pipeline inference were verified via Node.js/DOM browser controller harness and live HTTP API tests."
+  },
+  "checks": [
+    {
+      "check_id": 1,
+      "name": "Application starts normally and serves Live Microscope UI & API status",
+      "passed": true,
+      "details": {
+        "http_root_status": 200,
+        "http_api_status": 200,
+        "preset_sample_count": 25,
+        "missing_ui_tokens": []
+      }
+    },
+    {
+      "check_id": 2,
+      "name": "Existing manual upload workflow continues working without regression",
+      "passed": true,
+      "details": {
+        "http_status": 200,
+        "run_id": "run_20261012_232407_IMG_20150819_133447_finetuned_raw_raw_453c50",
+        "capture_source": "manual_upload",
+        "counts": {
+          "raw_yolo_detections": 195,
+          "valid_candidate_rbc_crops": 195,
+          "cnn_parasitized_rbc_count": 74,
+          "cnn_uninfected_rbc_count": 121,
+          "cnn_raw_crop_parasitized_count": 74,
+          "cnn_raw_crop_uninfected_count": 121,
+          "cnn_ellipse_masked_parasitized_count": 71,
+          "cnn_ellipse_masked_uninfected_count": 124,
+          "excluded_wbc_detections": 0,
+          "rejected_or_duplicate_boxes": 0
+        },
+        "export_pdf": "/api/file?run_id=run_20261012_232407_IMG_20150819_133447_finetuned_raw_raw_453c50&file=SmartCell_Report_IMG_20150819_133447.pdf&download=1"
+      }
+    },
+    {
+      "check_id": 3,
+      "name": "Camera permission, unavailable camera, hardware in-use, disconnected camera, and unsupported browser errors handled cleanly",
+      "passed": true,
+      "details": {
+        "permission_denied_handled": true,
+        "camera_not_found_handled": true,
+        "camera_in_use_handled": true,
+        "unsupported_browser_handled": true,
+        "disconnected_camera_handled": true
+      }
+    },
+    {
+      "check_id": 4,
+      "name": "Device selection works when multiple cameras are available",
+      "passed": true,
+      "details": {
+        "camera_started": true,
+        "multi_camera_switched": true
+      }
+    },
+    {
+      "check_id": 5,
+      "name": "Captured frames produce valid JPEG image data preserving aspect ratio and resolution",
+      "passed": true,
+      "details": {
+        "format": "JPEG",
+        "original_dimensions": [
+          5312,
+          2988
+        ],
+        "captured_dimensions": [
+          5312,
+          2988
+        ],
+        "jpeg_byte_size": 2218265,
+        "ui_canvas_toblob_verified": true,
+        "hardware_camera_probe": {
+          "directshow_index_0_opened": true,
+          "frame_captured": true,
+          "resolution": "640x480",
+          "usb_microscope_physically_connected": false,
+          "detected_camera_devices": [
+            {
+              "FriendlyName": "HP Wide Vision HD Camera",
+              "InstanceId": "USB\\VID_30C9&PID_0069&MI_00\\6&2000B69F&0&0000"
+            },
+            {
+              "FriendlyName": "HP LaserJet Pro MFP 4104 [D3C021]",
+              "InstanceId": "SWD\\ESCL\\6FD38642-AEF4-491A-A88D-41571108DFF8"
+            }
+          ],
+          "testing_mode_summary": "Integrated Windows UVC camera (HP Wide Vision HD Camera, 640x480 via DirectShow) probed directly; external USB digital microscope was not physically plugged in during automated verification, so microscope camera states, multi-camera selection, track release, and blood-smear frame capture -> pipeline inference were verified via Node.js/DOM browser controller harness and live HTTP API tests."
+        }
+      }
+    },
+    {
+      "check_id": 6,
+      "name": "Invalid, empty, tiny, and oversized images rejected safely; black, blank, and blurred frames produce pre-inference quality warnings",
+      "passed": true,
+      "details": {
+        "empty_upload_http_status": 400,
+        "corrupt_upload_http_status": 400,
+        "tiny_16x16_http_status": 400,
+        "oversized_35mb_rejected": true,
+        "black_frame_detected": true,
+        "blank_frame_detected": true,
+        "blurred_frame_detected": true,
+        "sample_black_warning": "Quality Warning (Black Frame): Captured/uploaded image is nearly completely black (mean luminance=0.0/255, std=0.0). Check microscope illumination and camera shutter.",
+        "sample_blur_warning": "Quality Warning (Potential Blur / Out-of-Focus): Frame has a low focus sharpness score (Laplacian variance=0.4 < 18.0). Adjust the microscope fine-focus knob and retake if needed."
+      }
+    },
+    {
+      "check_id": 7,
+      "name": "Capture & Analyze calls the existing two-stage pipeline directly with sanitized capture filename",
+      "passed": true,
+      "details": {
+        "http_status": 200,
+        "run_id": "run_20261012_232500_microscope_capture_20261012_232500_8b2967_finetuned_raw_raw_45094a",
+        "sanitized_image_filename": "microscope_capture_20261012_232500_8b2967.jpg",
+        "stem": "microscope_capture_20261012_232500_8b2967",
+        "capture_source": "live_microscope",
+        "processing_time_seconds": {
+          "stage1_yolo_detection_and_cropping": 7.7611,
+          "stage2_cnn_classification": 9.6067,
+          "total_pipeline_seconds": 17.3678
+        }
+      }
+    },
+    {
+      "check_id": 8,
+      "name": "Counts and parasitemia match the actual run results across API response, field_summary JSON, and per-cell CSV",
+      "passed": true,
+      "details": {
+        "api_counts": {
+          "raw_yolo_detections": 196,
+          "valid_candidate_rbc_crops": 196,
+          "cnn_parasitized_rbc_count": 76,
+          "cnn_uninfected_rbc_count": 120,
+          "cnn_raw_crop_parasitized_count": 76,
+          "cnn_raw_crop_uninfected_count": 120,
+          "cnn_ellipse_masked_parasitized_count": 73,
+          "cnn_ellipse_masked_uninfected_count": 123,
+          "excluded_wbc_detections": 0,
+          "rejected_or_duplicate_boxes": 0
+        },
+        "disk_counts": {
+          "raw_yolo_detections": 196,
+          "valid_candidate_rbc_crops": 196,
+          "cnn_parasitized_rbc_count": 76,
+          "cnn_uninfected_rbc_count": 120,
+          "cnn_raw_crop_parasitized_count": 76,
+          "cnn_raw_crop_uninfected_count": 120,
+          "cnn_ellipse_masked_parasitized_count": 73,
+          "cnn_ellipse_masked_uninfected_count": 123,
+          "excluded_wbc_detections": 0,
+          "rejected_or_duplicate_boxes": 0
+        },
+        "csv_valid_rbc_rows": 196,
+        "csv_parasitized_rows": 76,
+        "csv_uninfected_rows": 120,
+        "api_parasitemia_pct": 38.7755,
+        "disk_parasitemia_pct": 38.7755
+      }
+    },
+    {
+      "check_id": 9,
+      "name": "Original captured image, annotated image, and 2-page PDF (Sections A-E, G, Final AI Screening Result, without Section F) are generated",
+      "passed": true,
+      "details": {
+        "original_image_http_status": 200,
+        "original_image_bytes": 2218265,
+        "annotated_image_http_status": 200,
+        "annotated_image_bytes": 290303,
+        "pdf_filename": "SmartCell_Report_microscope_capture_20261012_232500_8b2967.pdf",
+        "pdf_page_count": 2,
+        "missing_pdf_headings": [],
+        "forbidden_section_f_present": false,
+        "final_screening_result": "The AI flagged 76 potentially parasitized red blood cells. Estimated parasitemia: 38.78%."
+      }
+    },
+    {
+      "check_id": 10,
+      "name": "PDF download endpoint returns the exact generated PDF for the current microscope capture run",
+      "passed": true,
+      "details": {
+        "http_status": 200,
+        "content_type": "application/pdf",
+        "content_disposition": "attachment; filename=\"SmartCell_Report_microscope_capture_20261012_232500_8b2967.pdf\"",
+        "downloaded_bytes": 371330,
+        "disk_pdf_bytes": 371330
+      }
+    },
+    {
+      "check_id": 11,
+      "name": "Repeated microscope captures generate unique run IDs, unique filenames, and fresh inference results without stale data",
+      "passed": true,
+      "details": {
+        "capture_1_run_id": "run_20261012_232500_microscope_capture_20261012_232500_8b2967_finetuned_raw_raw_45094a",
+        "capture_2_run_id": "run_20261012_232552_microscope_capture_20261012_232551_981508_finetuned_raw_raw_9d435b",
+        "capture_1_image_filename": "microscope_capture_20261012_232500_8b2967.jpg",
+        "capture_2_image_filename": "microscope_capture_20261012_232551_981508.jpg",
+        "capture_1_counts": {
+          "raw_yolo_detections": 196,
+          "valid_candidate_rbc_crops": 196,
+          "cnn_parasitized_rbc_count": 76,
+          "cnn_uninfected_rbc_count": 120,
+          "cnn_raw_crop_parasitized_count": 76,
+          "cnn_raw_crop_uninfected_count": 120,
+          "cnn_ellipse_masked_parasitized_count": 73,
+          "cnn_ellipse_masked_uninfected_count": 123,
+          "excluded_wbc_detections": 0,
+          "rejected_or_duplicate_boxes": 0
+        },
+        "capture_2_counts": {
+          "raw_yolo_detections": 210,
+          "valid_candidate_rbc_crops": 210,
+          "cnn_parasitized_rbc_count": 1,
+          "cnn_uninfected_rbc_count": 209,
+          "cnn_raw_crop_parasitized_count": 1,
+          "cnn_raw_crop_uninfected_count": 209,
+          "cnn_ellipse_masked_parasitized_count": 1,
+          "cnn_ellipse_masked_uninfected_count": 209,
+          "excluded_wbc_detections": 0,
+          "rejected_or_duplicate_boxes": 0
+        },
+        "capture_1_parasitemia_pct": 38.7755,
+        "capture_2_parasitemia_pct": 0.4762
+      }
+    },
+    {
+      "check_id": 12,
+      "name": "Camera MediaStream tracks are properly stopped when clicking Stop Camera or returning to manual upload",
+      "passed": true,
+      "details": {
+        "tracks_released_on_stop": true,
+        "tracks_released_on_return_manual": true
+      }
+    },
+    {
+      "check_id": 13,
+      "name": "Existing Phase 7, Phase 8, and PDF verification reports remain intact on disk",
+      "passed": true,
+      "details": {
+        "verified_report_count": 10,
+        "missing_or_empty_reports": []
+      }
+    }
+  ]
+}

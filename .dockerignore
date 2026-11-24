@@ -1,0 +1,46 @@
+# Virtual Environments
+venv/
+venv_yolo/
+venv_yolo_gpu/
+.env
+.venv/
+env/
+
+# Raw Heavy Training Datasets (Exclude from container build)
+ALL_IDB1/
+ALL_IDB2/
+cell_images/
+dataset/
+dataset_all/train/
+dataset_all/val/
+Polygon Set/
+Point Set/
+Testing_images/
+yolo_malaria/images/train/
+yolo_malaria/images/val/
+yolo_malaria/labels/train/
+yolo_malaria/labels/val/
+
+# Intermediate & Temporary Run Outputs
+results/demo_app_runs/
+results/smartcell_pipeline/
+results/all_idb/
+results/yolo_malaria_run/weights/last.pt
+results/visual_verification/
+runs/
+*.log
+*.tmp
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Git & Local configs
+.git/
+.gitignore
+.github/
+.idea/
+.vscode/
+launch_smartcell_demo.bat

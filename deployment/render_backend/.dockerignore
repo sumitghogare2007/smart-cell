@@ -1,0 +1,22 @@
+.git
+.github
+venv*
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.log
+.pytest_cache
+.vscode
+.idea
+results/demo_app_runs/*
+!results/demo_app_runs/_uploads
+Polygon Set
+dataset
+Testing_images
+yolo_malaria/images/train
+yolo_malaria/images/val
+yolo_malaria/labels/train
+yolo_malaria/labels/val
+dataset_all/train
+dataset_all/val
