@@ -10,9 +10,9 @@
  */
 
 window.SMARTCELL_CONFIG = {
-  // Default Backend API Base URL (leave empty "" for unconfigured / standalone mode)
-  // Example: "https://your-smartcell-backend.hf.space" or "http://127.0.0.1:8501"
-  API_BASE_URL: "",
+  // Default Backend API Base URL
+  // Deployed Render backend service: https://smart-cell.onrender.com
+  API_BASE_URL: "https://smart-cell.onrender.com",
 
   // Standard SmartCell REST API Endpoints
   ENDPOINTS: {
@@ -23,7 +23,7 @@ window.SMARTCELL_CONFIG = {
   },
 
   // Connection & Inference Request Timeouts
-  HEALTH_CHECK_TIMEOUT_MS: 5000,
+  HEALTH_CHECK_TIMEOUT_MS: 8000,
   ANALYSIS_TIMEOUT_MS: 120000, // 2 minutes for deep-learning two-stage whole-smear inference
 
   // File Upload Guardrails
@@ -41,8 +41,13 @@ window.SMARTCELL_CONFIG = {
   getActiveApiUrl: function() {
     try {
       const stored = localStorage.getItem("smartcell_api_base_url");
-      if (stored !== null && stored.trim() !== "") {
-        return stored.trim().replace(/\/+$/, "");
+      if (stored !== null) {
+        // If explicitly stored as empty string or 'offline', respect user's offline mode choice
+        const trimmedStored = stored.trim();
+        if (trimmedStored === "" || trimmedStored.toLowerCase() === "offline") {
+          return "";
+        }
+        return trimmedStored.replace(/\/+$/, "");
       }
     } catch (e) {
       // localStorage may be disabled in restricted iframe sandboxes
@@ -53,12 +58,12 @@ window.SMARTCELL_CONFIG = {
   // Helper: Save active API base URL to localStorage
   setActiveApiUrl: function(url) {
     if (url === undefined || url === null) {
-      try { localStorage.removeItem("smartcell_api_base_url"); } catch (e) {}
+      try { localStorage.setItem("smartcell_api_base_url", ""); } catch (e) {}
       return "";
     }
     const trimmed = String(url).trim();
     if (!trimmed) {
-      try { localStorage.removeItem("smartcell_api_base_url"); } catch (e) {}
+      try { localStorage.setItem("smartcell_api_base_url", ""); } catch (e) {}
       return "";
     }
     let cleanUrl = "";
@@ -77,11 +82,7 @@ window.SMARTCELL_CONFIG = {
     }
 
     try {
-      if (cleanUrl) {
-        localStorage.setItem("smartcell_api_base_url", cleanUrl);
-      } else {
-        localStorage.removeItem("smartcell_api_base_url");
-      }
+      localStorage.setItem("smartcell_api_base_url", cleanUrl);
     } catch (e) {
       console.warn("Could not save to localStorage:", e);
     }

@@ -8,12 +8,21 @@
 // BACKEND CONNECTION MANAGER & SETTINGS MODAL
 // ============================================================================
 const SmartCellBackendManager = {
-  status: 'unconfigured', // 'unconfigured' | 'offline' | 'connected' | 'processing' | 'failed' | 'timeout' | 'invalid'
-  statusText: 'Backend: Not Configured',
+  // Possible states: 'connected' (🟢) | 'checking' (🟡) | 'disconnected' (🔴) | 'unconfigured' (⚪)
+  status: 'unconfigured',
+  statusText: 'Not Configured',
   lastLatencyMs: null,
 
   init() {
     this.bindEvents();
+    const currentUrl = this.getApiBaseUrl();
+    if (currentUrl) {
+      this.status = 'checking';
+      this.statusText = 'Checking...';
+    } else {
+      this.status = 'unconfigured';
+      this.statusText = 'Not Configured';
+    }
     this.updateStatusDisplay();
     this.checkHealth();
   },
@@ -40,7 +49,7 @@ const SmartCellBackendManager = {
         isValid: false,
         isEmpty: false,
         normalizedUrl: null,
-        error: 'Malformed URL: Please enter a valid address with protocol (e.g. http://127.0.0.1:8501 or https://my-backend.hf.space).'
+        error: 'Malformed URL: Please enter a valid address with protocol (e.g. https://smart-cell.onrender.com or http://127.0.0.1:8501).'
       };
     }
 
@@ -101,7 +110,7 @@ const SmartCellBackendManager = {
 
   /**
    * Safely render status message into DOM without using unsafe innerHTML.
-   * Completely eliminates XSS / HTML injection risks.
+   * Eliminates XSS / HTML injection risks.
    */
   setSafeStatusMessage(container, alertClass, strongPrefix, messageText) {
     if (!container) return;
@@ -123,19 +132,59 @@ const SmartCellBackendManager = {
   bindEvents() {
     const pill = document.getElementById('backendStatusPill');
     const openBtn = document.getElementById('openConfigModalBtn');
+    const bannerBtn = document.getElementById('bannerConfigBtn');
     const closeBtn = document.getElementById('closeConfigModalBtn');
     const modal = document.getElementById('backendConfigModal');
     const testBtn = document.getElementById('testBackendBtn');
     const saveBtn = document.getElementById('saveBackendBtn');
+    const resetBtn = document.getElementById('resetDefaultUrlBtn');
+    const input = document.getElementById('backendUrlInput');
 
-    if (pill) pill.addEventListener('click', () => this.openModal());
+    if (pill) {
+      pill.addEventListener('click', () => this.openModal());
+      pill.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.openModal();
+        }
+      });
+    }
     if (openBtn) openBtn.addEventListener('click', () => this.openModal());
+    if (bannerBtn) bannerBtn.addEventListener('click', () => this.openModal());
     if (closeBtn) closeBtn.addEventListener('click', () => this.closeModal());
     if (modal) {
       modal.addEventListener('click', (e) => {
         if (e.target === modal) this.closeModal();
       });
     }
+
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        if (input) {
+          input.value = 'https://smart-cell.onrender.com';
+          input.focus();
+        }
+      });
+    }
+
+    if (input) {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          this.saveFromModal();
+        }
+      });
+    }
+
+    // Keyboard accessibility: Escape closes modal
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const modalEl = document.getElementById('backendConfigModal');
+        if (modalEl && modalEl.classList.contains('active')) {
+          this.closeModal();
+        }
+      }
+    });
 
     if (testBtn) testBtn.addEventListener('click', () => this.testConnectionFromModal());
     if (saveBtn) saveBtn.addEventListener('click', () => this.saveFromModal());
@@ -145,14 +194,45 @@ const SmartCellBackendManager = {
     const modal = document.getElementById('backendConfigModal');
     const input = document.getElementById('backendUrlInput');
     const statusBox = document.getElementById('modalTestStatus');
-    if (input) input.value = this.getApiBaseUrl();
+    
+    // Retrieve active API URL. If null or not set, default to Render backend
+    const currentUrl = this.getApiBaseUrl();
+    if (input) {
+      input.value = currentUrl;
+    }
     if (statusBox) {
       statusBox.className = 'modal-test-status';
       while (statusBox.firstChild) {
         statusBox.removeChild(statusBox.firstChild);
       }
+      // Show current state info inside modal
+      if (this.status === 'connected') {
+        this.setSafeStatusMessage(
+          statusBox,
+          'alert-success',
+          'Currently Connected:',
+          `Active backend at "${currentUrl}" is online (${this.lastLatencyMs !== null ? this.lastLatencyMs + 'ms' : 'verified'}).`
+        );
+      } else if (this.status === 'disconnected') {
+        this.setSafeStatusMessage(
+          statusBox,
+          'alert-error',
+          'Currently Disconnected:',
+          `Backend at "${currentUrl}" could not be reached. Click "Test Connection" to diagnose.`
+        );
+      } else if (this.status === 'unconfigured') {
+        this.setSafeStatusMessage(
+          statusBox,
+          'alert-warn',
+          'Preview Mode:',
+          'No backend URL configured. The application is running in client-side preview mode.'
+        );
+      }
     }
-    if (modal) modal.classList.add('active');
+    if (modal) {
+      modal.classList.add('active');
+      if (input) setTimeout(() => input.focus(), 80);
+    }
   },
 
   closeModal() {
@@ -173,7 +253,7 @@ const SmartCellBackendManager = {
     }
 
     if (validation.isEmpty) {
-      this.setSafeStatusMessage(statusBox, 'alert-warn', 'No URL Entered:', 'Please enter a valid HTTP/HTTPS address, or leave empty to operate in standalone/offline preview mode.');
+      this.setSafeStatusMessage(statusBox, 'alert-warn', 'No URL Entered:', 'Please enter a valid HTTP/HTTPS address, or leave blank to save offline / unconfigured preview mode.');
       return;
     }
 
@@ -183,11 +263,13 @@ const SmartCellBackendManager = {
       testBtn.textContent = 'Testing...';
     }
 
+    this.setSafeStatusMessage(statusBox, 'alert-info', 'Testing:', `Sending verification request to ${candidateUrl}/api/health...`);
+
     let timeoutId = null;
     const start = performance.now();
     try {
       const controller = new AbortController();
-      timeoutId = setTimeout(() => controller.abort(), 6000);
+      timeoutId = setTimeout(() => controller.abort(), 8000);
 
       const resp = await fetch(`${candidateUrl}/api/health`, {
         method: 'GET',
@@ -200,14 +282,14 @@ const SmartCellBackendManager = {
       if (resp.ok) {
         let data = {};
         try { data = await resp.json(); } catch (err) { data = {}; }
-        const serviceName = String(data.service || 'SmartCell Backend');
+        const serviceName = String(data.service || 'SmartCell Platform');
+        const modes = Array.isArray(data.modes) ? data.modes.join(', ') : 'malaria & leukemia';
 
-        // Accurate health-check wording: indicates reachability, not guaranteed model readiness
         this.setSafeStatusMessage(
           statusBox,
           'alert-success',
-          `Reachable (${latency} ms):`,
-          `Backend server "${serviceName}" is online and reachable. Note: AI model readiness and GPU status are verified by the server during screening.`
+          `HTTP ${resp.status} OK (${latency} ms):`,
+          `Backend "${serviceName}" is reachable and operational. Supported modes: [${modes}]. Click "Save & Connect" to activate.`
         );
       } else {
         const statusText = resp.statusText || 'Unexpected error status';
@@ -215,7 +297,7 @@ const SmartCellBackendManager = {
           statusBox,
           'alert-error',
           `Server Error (HTTP ${resp.status}):`,
-          `Endpoint responded with status ${resp.status} (${statusText}). Verify the backend service is running correctly.`
+          `Endpoint responded with HTTP ${resp.status} (${statusText}). Check whether the service is running properly.`
         );
       }
     } catch (err) {
@@ -225,7 +307,7 @@ const SmartCellBackendManager = {
           statusBox,
           'alert-error',
           'Connection Timed Out:',
-          `Request to "${candidateUrl}" timed out after 6 seconds. Check if the server is running and accessible over your network.`
+          `Request to "${candidateUrl}" timed out after 8 seconds. Note: Render Free Tier instances spin down on idle and take ~30-50 seconds to warm up. Please wait a moment and click "Test Connection" again.`
         );
       } else {
         const errorMsg = err && err.message ? err.message : 'Network unreachable';
@@ -233,7 +315,7 @@ const SmartCellBackendManager = {
           statusBox,
           'alert-error',
           'Connection Failed:',
-          `Could not reach "${candidateUrl}" (${errorMsg}). If using a local server, ensure it is running and permits Cross-Origin Resource Sharing (CORS).`
+          `Could not connect to "${candidateUrl}" (${errorMsg}). Verify that the URL is correct, the backend service is running, and cross-origin requests (CORS) are permitted.`
         );
       }
     } finally {
@@ -259,6 +341,18 @@ const SmartCellBackendManager = {
       return;
     }
 
+    if (validation.isEmpty) {
+      // User explicitly requested offline / unconfigured preview mode
+      if (window.SMARTCELL_CONFIG && typeof window.SMARTCELL_CONFIG.setActiveApiUrl === 'function') {
+        window.SMARTCELL_CONFIG.setActiveApiUrl('');
+      }
+      this.status = 'unconfigured';
+      this.statusText = 'Not Configured';
+      this.updateStatusDisplay();
+      this.closeModal();
+      return;
+    }
+
     const cleanUrl = validation.normalizedUrl;
     if (window.SMARTCELL_CONFIG && typeof window.SMARTCELL_CONFIG.setActiveApiUrl === 'function') {
       window.SMARTCELL_CONFIG.setActiveApiUrl(cleanUrl);
@@ -271,19 +365,16 @@ const SmartCellBackendManager = {
     const rawUrl = this.getApiBaseUrl();
     const validation = this.validateUrl(rawUrl);
 
-    if (!validation.isValid) {
-      this.status = 'invalid';
-      this.statusText = 'Backend: Invalid URL';
+    if (!validation.isValid || validation.isEmpty) {
+      this.status = 'unconfigured';
+      this.statusText = 'Not Configured';
       this.updateStatusDisplay();
       return;
     }
 
-    if (validation.isEmpty) {
-      this.status = 'unconfigured';
-      this.statusText = 'Backend: Not Configured';
-      this.updateStatusDisplay();
-      return;
-    }
+    this.status = 'checking';
+    this.statusText = 'Checking...';
+    this.updateStatusDisplay();
 
     const apiUrl = validation.normalizedUrl;
     let timeoutId = null;
@@ -291,7 +382,7 @@ const SmartCellBackendManager = {
 
     try {
       const controller = new AbortController();
-      timeoutId = setTimeout(() => controller.abort(), 5000);
+      timeoutId = setTimeout(() => controller.abort(), 8000);
 
       const resp = await fetch(`${apiUrl}/api/health`, {
         method: 'GET',
@@ -303,23 +394,18 @@ const SmartCellBackendManager = {
 
       if (resp.ok) {
         this.status = 'connected';
-        this.statusText = `Backend: Online (${this.lastLatencyMs}ms)`;
+        this.statusText = `Connected (${this.lastLatencyMs}ms)`;
         this.updateStatusDisplay();
         await this.queryEnvironmentStatus();
       } else {
-        this.status = 'failed';
-        this.statusText = `Backend: Error (${resp.status})`;
+        this.status = 'disconnected';
+        this.statusText = `Disconnected (HTTP ${resp.status})`;
         this.updateStatusDisplay();
       }
     } catch (e) {
       const isTimeout = (e && (e.name === 'AbortError' || e.message === 'The operation was aborted.'));
-      if (isTimeout) {
-        this.status = 'timeout';
-        this.statusText = 'Backend: Timed Out';
-      } else {
-        this.status = 'offline';
-        this.statusText = 'Backend: Offline';
-      }
+      this.status = 'disconnected';
+      this.statusText = isTimeout ? 'Disconnected (Timeout)' : 'Disconnected';
       this.updateStatusDisplay();
     } finally {
       if (timeoutId) {
@@ -335,11 +421,17 @@ const SmartCellBackendManager = {
     const pill = document.getElementById('backendStatusPill');
 
     if (dot) {
+      // Possible states: 'connected' (🟢) | 'checking' (🟡) | 'disconnected' (🔴) | 'unconfigured' (⚪)
       let dotClass = 'dot-unconfigured';
-      if (this.status === 'connected') dotClass = 'dot-connected';
-      else if (this.status === 'offline' || this.status === 'timeout') dotClass = 'dot-offline';
-      else if (this.status === 'failed' || this.status === 'invalid') dotClass = 'dot-failed';
-      else if (this.status === 'processing') dotClass = 'dot-processing';
+      if (this.status === 'connected') {
+        dotClass = 'dot-connected';
+      } else if (this.status === 'checking') {
+        dotClass = 'dot-checking';
+      } else if (this.status === 'disconnected') {
+        dotClass = 'dot-disconnected';
+      } else if (this.status === 'unconfigured') {
+        dotClass = 'dot-unconfigured';
+      }
 
       dot.className = `status-indicator-dot ${dotClass}`;
     }
@@ -347,7 +439,7 @@ const SmartCellBackendManager = {
       text.textContent = this.statusText;
     }
     if (pill) {
-      pill.title = `${this.statusText} (Click to configure backend URL)`;
+      pill.title = `Backend Status: ${this.statusText} (Click to configure or retest)`;
     }
   },
 
@@ -1717,7 +1809,8 @@ function selectLeukemiaPreset(btn, filename) {
   const prevImg = document.getElementById('leukemiaSamplePreviewImg');
   const badgeEl = document.getElementById('leukemiaSampleDetailsBadge');
   if (prevSection && prevImg) {
-    prevImg.src = `/api/preset_image?filename=${encodeURIComponent(filename)}&disease=leukemia`;
+    const baseUrl = SmartCellBackendManager.getApiBaseUrl();
+    prevImg.src = baseUrl ? `${baseUrl}/api/preset_image?filename=${encodeURIComponent(filename)}&disease=leukemia` : `/api/preset_image?filename=${encodeURIComponent(filename)}&disease=leukemia`;
     if (badgeEl) badgeEl.textContent = isBlast ? 'Blast Candidate' : 'Normal Reference';
     prevSection.style.display = 'block';
   }

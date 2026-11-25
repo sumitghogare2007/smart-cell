@@ -21,14 +21,16 @@
 <div class="static-deployment-banner">
   <div>
     <strong>Hugging Face Static Deployment:</strong>
-    <span>Client-side biomedical interface. Live deep learning inference connects to a dedicated SmartCell AI backend.</span>
+    <span>Client-side biomedical interface. Live deep learning inference connects to the SmartCell Render AI backend.</span>
   </div>
-  <div style="display:flex; align-items:center; gap:10px;">
-    <div id="backendStatusPill" class="backend-status-pill" title="Click to configure backend URL">
-      <span id="statusIndicatorDot" class="status-indicator-dot dot-unconfigured"></span>
-      <span id="statusIndicatorText">Backend: Not Configured</span>
-    </div>
-    <button type="button" class="btn-config-backend" id="openConfigModalBtn">Settings</button>
+  <div class="static-banner-actions">
+    <button type="button" class="btn-config-backend btn-banner-settings" id="bannerConfigBtn" title="Open Backend Connection Settings">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+      </svg>
+      <span>Settings</span>
+    </button>
   </div>
 </div>
 
@@ -55,7 +57,22 @@
         <p class="sub-secondary">Intelligent microscopy research for malaria and leukemia cell analysis.</p>
       </div>
     </div>
-    <div>
+    <div class="header-actions">
+      <!-- Backend Connection Status Indicator -->
+      <button type="button" id="backendStatusPill" class="backend-status-pill" title="Backend Connection Status — Click to test or configure" aria-label="Backend Connection Status">
+        <span id="statusIndicatorDot" class="status-indicator-dot dot-unconfigured"></span>
+        <span id="statusIndicatorText">Backend: Not Configured</span>
+      </button>
+
+      <!-- Backend Connection Settings Button -->
+      <button type="button" class="btn-config-backend header-settings-btn" id="openConfigModalBtn" title="Backend Connection Settings" aria-label="Open Backend Connection Settings">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+        <span>Backend Settings</span>
+      </button>
+
       <details class="diag-details">
         <summary class="diag-summary">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20v-6M6 20V10M18 20V4"/></svg>
@@ -734,36 +751,40 @@
 </main>
 
 <!-- Backend Connection Configuration Modal -->
-<div class="modal-overlay" id="backendConfigModal">
+<div class="modal-overlay" id="backendConfigModal" role="dialog" aria-modal="true" aria-labelledby="backendModalTitle">
   <div class="modal-card">
     <div class="modal-header">
-      <h3>
+      <h3 id="backendModalTitle">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);">
           <circle cx="12" cy="12" r="3"></circle>
           <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
         </svg>
-        SmartCell AI Backend Connection Settings
+        Backend Connection Settings
       </h3>
-      <button type="button" class="modal-close-btn" id="closeConfigModalBtn">&times;</button>
+      <button type="button" class="modal-close-btn" id="closeConfigModalBtn" aria-label="Close dialog">&times;</button>
     </div>
     <div class="modal-body">
       <p style="margin:0; font-size:0.88rem; color:var(--muted); line-height:1.5;">
-        Because Hugging Face Static Spaces host client-side assets only, live AI model inference (YOLOv8n object detection, CNN parasitemia quantification, and EfficientNetB0 leukemia classification) is performed by connecting to a SmartCell API service.
+        Configure the active API URL for the SmartCell AI inference engine (YOLOv8n RBC detection, CNN malaria parasitemia estimation, and EfficientNetB0 ALL leukemia screening).
       </p>
       <div class="modal-input-group">
         <label for="backendUrlInput">Backend API Base URL</label>
-        <input type="url" id="backendUrlInput" class="modal-input" placeholder="e.g. http://127.0.0.1:8501 or https://my-backend.hf.space" autocomplete="off" spellcheck="false">
-        <span style="font-size:0.75rem; color:var(--muted);">Leave blank for offline / unconfigured preview mode.</span>
+        <div style="display:flex; gap:8px;">
+          <input type="url" id="backendUrlInput" class="modal-input" style="flex:1;" placeholder="https://smart-cell.onrender.com" autocomplete="off" spellcheck="false">
+          <button type="button" class="btn btn-secondary" id="resetDefaultUrlBtn" style="padding:6px 14px; font-size:0.8rem; white-space:nowrap;" title="Reset input to default Render URL">Default</button>
+        </div>
+        <span style="font-size:0.75rem; color:var(--muted);">Default: <code>https://smart-cell.onrender.com</code>. Leave blank for offline / unconfigured preview mode.</span>
       </div>
       <div id="modalTestStatus" class="modal-test-status"></div>
       <div style="background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px; font-size:0.8rem; color:var(--muted);">
-        <strong style="color:var(--text-bright); display:block; margin-bottom:4px;">Local Execution Quick-Start:</strong>
-        To run the AI backend on your local GPU/CPU machine, execute <code>launch_smartcell_demo.bat</code> in the repository root, which starts the server at <code>http://127.0.0.1:8501</code>.
+        <strong style="color:var(--text-bright); display:block; margin-bottom:4px;">Supported Deployment Endpoints:</strong>
+        <div>• <strong>Render Cloud Backend:</strong> <code>https://smart-cell.onrender.com</code> (Production)</div>
+        <div>• <strong>Local Workstation Backend:</strong> <code>http://127.0.0.1:8501</code> (Run <code>launch_smartcell_demo.bat</code>)</div>
       </div>
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" id="testBackendBtn">Test Connection</button>
-      <button type="button" class="btn btn-primary" id="saveBackendBtn">Save & Connect</button>
+      <button type="button" class="btn btn-primary" id="saveBackendBtn">Save &amp; Connect</button>
     </div>
   </div>
 </div>

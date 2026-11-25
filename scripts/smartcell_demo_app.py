@@ -4063,10 +4063,40 @@ class SmartCellRequestHandler(BaseHTTPRequestHandler):
     def log_message(self, fmt, *args):
         sys.stdout.write(f"[SmartCell WebApp] {self.address_string()} - {fmt % args}\n")
 
+    def _is_allowed_origin(self, origin):
+        if not origin:
+            return False
+        origin_lower = origin.lower()
+        if origin_lower == "https://huggingface.co":
+            return True
+        if origin_lower.endswith(".hf.space") and (origin_lower.startswith("https://") or origin_lower.startswith("http://")):
+            return True
+        if origin_lower.startswith("http://localhost:") or origin_lower.startswith("http://127.0.0.1:"):
+            return True
+        if origin_lower == "http://localhost" or origin_lower == "http://127.0.0.1":
+            return True
+        if "onrender.com" in origin_lower:
+            return True
+        return False
+
+    def _add_cors_headers(self):
+        origin = self.headers.get("Origin")
+        if origin and self._is_allowed_origin(origin):
+            self.send_header("Access-Control-Allow-Origin", origin)
+            self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With, Accept, Origin")
+            self.send_header("Access-Control-Max-Age", "86400")
+            self.send_header("Vary", "Origin")
+        elif not origin:
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD")
+            self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With, Accept, Origin")
+
     def _send_json(self, status_code, payload):
         raw = json.dumps(payload, indent=2).encode("utf-8")
         try:
             self.send_response(status_code)
+            self._add_cors_headers()
             self.send_header("Content-Type", "application/json; charset=utf-8")
             self.send_header("Content-Length", str(len(raw)))
             self.send_header("Cache-Control", "no-store")
@@ -4075,16 +4105,25 @@ class SmartCellRequestHandler(BaseHTTPRequestHandler):
         except (ConnectionResetError, ConnectionAbortedError, BrokenPipeError):
             pass
 
+    def do_OPTIONS(self):
+        self.send_response(204)
+        self._add_cors_headers()
+        self.send_header("Content-Length", "0")
+        self.send_header("Cache-Control", "no-store")
+        self.end_headers()
+
     def do_HEAD(self):
         parsed = urlparse(self.path)
         path = parsed.path
         if path in ("/", "/index.html", "/api/health", "/health", "/healthz"):
             self.send_response(200)
+            self._add_cors_headers()
             self.send_header("Content-Type", "application/json" if "health" in path else "text/html; charset=utf-8")
             self.send_header("Cache-Control", "no-store")
             self.end_headers()
         else:
             self.send_response(404)
+            self._add_cors_headers()
             self.end_headers()
 
     def do_GET(self):
@@ -4095,6 +4134,7 @@ class SmartCellRequestHandler(BaseHTTPRequestHandler):
         if path in ("/", "/index.html"):
             raw = INDEX_HTML.encode("utf-8")
             self.send_response(200)
+            self._add_cors_headers()
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.send_header("Content-Length", str(len(raw)))
             self.send_header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
@@ -4116,6 +4156,24 @@ class SmartCellRequestHandler(BaseHTTPRequestHandler):
             refresh = qs.get("refresh", ["0"])[0] == "1"
             status = query_environment_status(force_refresh=refresh)
             self._send_json(200, status)
+            return
+
+        if path == "/api/preset_image":
+            fn = qs.get("filename", [""])[0]
+            cand = resolve_preset_image_path(fn)
+            if cand and os.path.isfile(cand):
+                ctype, _ = mimetypes.guess_type(cand)
+                with open(cand, "rb") as f:
+                    data = f.read()
+                self.send_response(200)
+                self._add_cors_headers()
+                self.send_header("Content-Type", ctype or "image/png")
+                self.send_header("Content-Length", str(len(data)))
+                self.send_header("Cache-Control", "public, max-age=3600")
+                self.end_headers()
+                self.wfile.write(data)
+                return
+            self._send_json(404, {"error": "Preset image not found."})
             return
 
         if path == "/api/file":
@@ -4143,6 +4201,7 @@ class SmartCellRequestHandler(BaseHTTPRequestHandler):
                 data = f.read()
 
             self.send_response(200)
+            self._add_cors_headers()
             self.send_header("Content-Type", ctype)
             self.send_header("Content-Length", str(len(data)))
             self.send_header("Cache-Control", "no-store")
