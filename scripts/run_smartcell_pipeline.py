@@ -103,8 +103,16 @@ def apply_elliptical_mask(crop_rgb_np):
     Zeroes out pixels outside the inscribed ellipse of a rectangular cell crop
     to match the black [0,0,0] background convention of the NIH single-cell dataset.
     Used for domain-mismatch comparison auditing.
+    Guards against memory exhaustion if supplied with large whole-smear images.
     """
     ch, cw = crop_rgb_np.shape[:2]
+    if ch > 512 or cw > 512:
+        from PIL import Image as _PILImg
+        pil_tmp = _PILImg.fromarray(crop_rgb_np)
+        pil_tmp.thumbnail((512, 512), _PILImg.Resampling.BILINEAR)
+        crop_rgb_np = np.array(pil_tmp)
+        ch, cw = crop_rgb_np.shape[:2]
+
     yy, xx = np.ogrid[:ch, :cw]
     cy, cx = ch / 2.0, cw / 2.0
     ry, rx = ch / 2.0, cw / 2.0
@@ -1048,22 +1056,28 @@ def run_single_cell_cnn(args):
     with Image.open(image_path) as pil_img:
         rgb_im = pil_img.convert("RGB")
         img_w, img_h = rgb_im.size
-        crop_np = np.array(rgb_im)
 
     crop_id = f"{stem}_cell_0001"
     crop_filename = f"{crop_id}.png"
     crop_rel_path = os.path.join("crops", crop_filename)
     crop_abs_path = os.path.join(crops_dir, crop_filename)
-    Image.fromarray(crop_np).save(crop_abs_path)
+    
+    # Save crop for visualization (downscale huge non-cropped frames to avoid runaway RAM)
+    save_im = rgb_im
+    if img_w > 512 or img_h > 512:
+        save_im = rgb_im.copy()
+        save_im.thumbnail((512, 512), Image.Resampling.BILINEAR)
+    save_im.save(crop_abs_path, format="PNG")
 
     cnn_model = tf.keras.models.load_model(args.cnn_model)
 
-    resized_raw = rgb_im.resize((224, 224))
-    raw_arr = np.expand_dims(np.array(resized_raw, dtype=np.float32), axis=0)
+    resized_raw = rgb_im.resize((224, 224), Image.Resampling.BILINEAR)
+    raw_np = np.array(resized_raw, dtype=np.float32)
+    raw_arr = np.expand_dims(raw_np, axis=0)
 
-    masked_np = apply_elliptical_mask(crop_np)
-    resized_masked = Image.fromarray(masked_np).resize((224, 224))
-    masked_arr = np.expand_dims(np.array(resized_masked, dtype=np.float32), axis=0)
+    # Apply elliptical mask directly to the normalized 224x224 patch
+    masked_np = apply_elliptical_mask(np.array(resized_raw))
+    masked_arr = np.expand_dims(masked_np.astype(np.float32), axis=0)
 
     p_raw = float(cnn_model.predict(raw_arr, verbose=0).flatten()[0])
     p_mask = float(cnn_model.predict(masked_arr, verbose=0).flatten()[0])

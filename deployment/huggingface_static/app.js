@@ -449,8 +449,9 @@ const SmartCellBackendManager = {
 
     try {
       const resp = await fetch(`${apiUrl}/api/status`);
-      if (resp.ok) {
-        const data = await resp.json();
+      const parsed = await parseApiResponse(resp);
+      if (parsed.ok && parsed.data) {
+        const data = parsed.data;
         ENV_STATUS = data;
 
         const g = data && data.gpu_environment;
@@ -484,6 +485,76 @@ const SmartCellBackendManager = {
 window.addEventListener('DOMContentLoaded', () => {
   SmartCellBackendManager.init();
 });
+
+// ============================================================================
+// SAFE API RESPONSE PARSER (Zero-Crash Guarantee)
+// ============================================================================
+/**
+ * Safely parse an HTTP response from the SmartCell backend.
+ * Guarantees that empty bodies, HTML error pages, and network/proxy disconnects
+ * never throw unhandled "Unexpected end of JSON input" SyntaxErrors.
+ */
+async function parseApiResponse(resp) {
+  const status = resp ? resp.status : 0;
+  let text = '';
+  try {
+    text = await resp.text();
+  } catch (err) {
+    text = '';
+  }
+
+  let data = null;
+  if (text && text.trim().length > 0) {
+    try {
+      data = JSON.parse(text);
+    } catch (e) {
+      data = null;
+    }
+  }
+
+  if (resp && resp.ok && data) {
+    return { ok: true, status, data, errorType: null, errorMessage: null };
+  }
+
+  let errorType = 'ServerError';
+  let errorMessage = '';
+
+  if (data && (data.error_message || data.error || data.detail)) {
+    errorMessage = data.error_message || data.error || data.detail;
+    errorType = data.error_type || `HTTP ${status}`;
+  } else if (status === 502) {
+    errorType = 'BackendUnavailable';
+    errorMessage = 'The Render backend container restarted or encountered an out-of-memory event (HTTP 502 Bad Gateway). Please wait ~30 seconds for the container to reload and try again.';
+  } else if (status === 503) {
+    errorType = 'ServiceUnavailable';
+    errorMessage = 'The Render backend is currently spinning up from cold sleep (HTTP 503 Service Unavailable). Please wait 30–45 seconds and retry.';
+  } else if (status === 504) {
+    errorType = 'GatewayTimeout';
+    errorMessage = 'Inference request timed out on the backend proxy (HTTP 504 Gateway Timeout). The server may be under heavy load; please retry in a moment.';
+  } else if (status === 413) {
+    errorType = 'PayloadTooLarge';
+    errorMessage = 'The uploaded image payload exceeds the maximum allowed upload limit (35 MB).';
+  } else if (status === 404) {
+    errorType = 'NotFound';
+    errorMessage = 'API route not found (HTTP 404). Please verify your Backend Connection URL in Settings.';
+  } else if (resp && !resp.ok) {
+    errorType = `HTTP ${status}`;
+    errorMessage = (text && text.length < 250 && !text.includes('<html'))
+      ? text.trim()
+      : `Backend server returned HTTP status ${status}.`;
+  } else if (!data) {
+    errorType = 'InvalidResponse';
+    errorMessage = 'Backend server returned an empty or unparseable response body.';
+  }
+
+  return {
+    ok: false,
+    status,
+    data: data || { success: false, error_type: errorType, error_message: errorMessage },
+    errorType,
+    errorMessage
+  };
+}
 
 
 // ============================================================================
@@ -1126,16 +1197,20 @@ async function captureAndAnalyzeLeukemiaMicroscope() {
       return;
     }
     const resp = await fetch(`${apiUrl}/api/analyze`, { method: 'POST', body: fd });
-    const data = await resp.json();
+    const parsed = await parseApiResponse(resp);
 
-    if (!data.success) {
+    if (!parsed.ok || !parsed.data || !parsed.data.success) {
+      const errType = (parsed.data && parsed.data.error_type) || parsed.errorType || 'Analysis Error';
+      const errMsg = (parsed.data && parsed.data.error_message) || parsed.errorMessage || 'Inference failed.';
       if (errBox) {
-        errBox.innerHTML = `<strong>${data.error_type || 'Analysis Error'}:</strong> ${data.error_message || 'Inference failed.'}`;
+        errBox.innerHTML = `<strong>${errType}:</strong> ${errMsg}`;
         errBox.style.display = 'block';
       }
       setMicroscopeStatus('err', 'Analysis Error — See Details Below', 'Error', 'leukemia');
       return;
     }
+
+    const data = parsed.data;
 
     renderLeukemiaResults(data);
     const emptyState = document.getElementById('leukemiaEmptyState');
@@ -1224,13 +1299,17 @@ async function captureAndAnalyzeMicroscope() {
       return;
     }
     const resp = await fetch(`${apiUrl}/api/analyze`, { method: 'POST', body: fd });
-    const data = await resp.json();
+    const parsed = await parseApiResponse(resp);
 
-    if (!data.success) {
+    if (!parsed.ok || !parsed.data || !parsed.data.success) {
       setMicroscopeStatus('err', 'Analysis Failed', 'Error');
-      errBox.innerHTML = `<div class="alert-error"><strong>${data.error_type || 'Analysis Error'}:</strong> ${data.error_message || 'Unknown error occurred.'}</div>`;
+      const errType = (parsed.data && parsed.data.error_type) || parsed.errorType || 'Analysis Error';
+      const errMsg = (parsed.data && parsed.data.error_message) || parsed.errorMessage || 'Unknown error occurred.';
+      errBox.innerHTML = `<div class="alert-error"><strong>${errType}:</strong> ${errMsg}</div>`;
       return;
     }
+
+    const data = parsed.data;
 
     CURRENT_RESULT = data;
     renderResults(data);
@@ -1320,8 +1399,12 @@ function inspectUploadedImageDimensions(fileObj) {
 
 async function loadEnvStatus() {
   try {
-    const apiUrl = SmartCellBackendManager.getApiBaseUrl(); if (!apiUrl) return; const resp = await fetch(`${apiUrl}/api/status`);
-    ENV_STATUS = await resp.json();
+    const apiUrl = SmartCellBackendManager.getApiBaseUrl();
+    if (!apiUrl) return;
+    const resp = await fetch(`${apiUrl}/api/status`);
+    const parsed = await parseApiResponse(resp);
+    if (!parsed.ok || !parsed.data) return;
+    ENV_STATUS = parsed.data;
     const g = ENV_STATUS.gpu_environment;
     const badges = document.getElementById('hwBadges');
     if (badges) {
@@ -1448,13 +1531,16 @@ async function runAnalysis() {
       return;
     }
     const resp = await fetch(`${apiUrl}/api/analyze`, { method: 'POST', body: fd });
-    const data = await resp.json();
+    const parsed = await parseApiResponse(resp);
 
-    if (!data.success) {
-      errBox.innerHTML = `<div class="alert-error"><strong>${data.error_type || 'Analysis Error'}:</strong> ${data.error_message || 'Unknown error occurred.'}</div>`;
+    if (!parsed.ok || !parsed.data || !parsed.data.success) {
+      const errType = (parsed.data && parsed.data.error_type) || parsed.errorType || 'Analysis Error';
+      const errMsg = (parsed.data && parsed.data.error_message) || parsed.errorMessage || 'Unknown error occurred.';
+      errBox.innerHTML = `<div class="alert-error"><strong>${errType}:</strong> ${errMsg}</div>`;
       return;
     }
 
+    const data = parsed.data;
     CURRENT_RESULT = data;
     renderResults(data);
   } catch (err) {
@@ -1914,15 +2000,19 @@ async function runLeukemiaAnalysis(sourceType) {
       return;
     }
     const resp = await fetch(`${apiUrl}/api/analyze`, { method: 'POST', body: fd });
-    const data = await resp.json();
+    const parsed = await parseApiResponse(resp);
 
-    if (!data.success) {
+    if (!parsed.ok || !parsed.data || !parsed.data.success) {
+      const errType = (parsed.data && parsed.data.error_type) || parsed.errorType || 'Analysis Error';
+      const errMsg = (parsed.data && parsed.data.error_message) || parsed.errorMessage || 'Inference failed.';
       if (errBox) {
-        errBox.innerHTML = `<strong>${data.error_type || 'Analysis Error'}:</strong> ${data.error_message || 'Inference failed.'}`;
+        errBox.innerHTML = `<strong>${errType}:</strong> ${errMsg}`;
         errBox.style.display = 'block';
       }
       return;
     }
+
+    const data = parsed.data;
 
     renderLeukemiaResults(data);
     if (emptyState) emptyState.style.display = 'none';
